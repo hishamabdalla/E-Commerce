@@ -4,7 +4,7 @@
     {
         [ForeignKey("ProductCategories")]
         public int CategoryId { get; set; }
-
+        [ForeignKey("Promotion")]
         public int PromotionId { get; set; }
 
         public ProductCategories ProductCategories { get; set; }

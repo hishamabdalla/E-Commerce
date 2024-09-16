@@ -7,9 +7,9 @@ namespace E_Commerce.Models.User
     {
         public int Id { get; set; }
 
-        public string FName { get; set; }
+        public string FirstName { get; set; }
 
-        public string LName { get; set; }
+        public string LastName { get; set; }
 
         public string Email { get; set; }
 
@@ -17,7 +17,7 @@ namespace E_Commerce.Models.User
 
         public string Phone { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         public int Age { get; set; }
 

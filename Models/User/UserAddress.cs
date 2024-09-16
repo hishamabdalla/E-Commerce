@@ -7,7 +7,7 @@
         public string City { get; set; } = string.Empty;
         public string Region { get; set; } = string.Empty;
 
-        public int? StreeNumber { get; set; }
+        public int? StreetNumber { get; set; }
         public string PostalCode { get; set; } = string.Empty;
 
         public int? UnitNumber { get; set; }

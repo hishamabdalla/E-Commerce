@@ -7,7 +7,7 @@
 
         public int QuantityInStock { get; set; }
 
-        public string ItemImage { get; set; }
+        public string Image { get; set; }
         public double Price { get; set; }
 
         [ForeignKey("Product")]
