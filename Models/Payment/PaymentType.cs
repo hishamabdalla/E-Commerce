@@ -1,4 +1,4 @@
-﻿namespace E_Commerce.Models
+﻿namespace E_Commerce.Models.Payment
 {
     public class PaymentType
     {
