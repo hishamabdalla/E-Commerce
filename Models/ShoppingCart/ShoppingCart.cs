@@ -1,6 +1,6 @@
-﻿namespace E_Commerce.Models
+﻿namespace E_Commerce.Models.ShoppingCart
 {
-    public class FavouriteList
+    public class ShoppingCart
     {
         public int Id { get; set; }
         public int UserId { get; set; }
