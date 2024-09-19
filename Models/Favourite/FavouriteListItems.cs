@@ -4,9 +4,11 @@ namespace E_Commerce.Models.Favourite
 {
     public class FavouriteListItems
     {
+        [ForeignKey("FavouriteList")]
         public int FavouriteListId { get; set; }
         [ForeignKey("Product")]
         public int ProductItemId { get; set; }
         public Product_Item? Product { get; set; }
+        public FavouriteList? FavouriteList { get; set; }
     }
 }
