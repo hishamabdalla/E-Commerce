@@ -1,4 +1,8 @@
-﻿namespace E_Commerce.Models.Product
+﻿using E_Commerce.Models.Favourite;
+using E_Commerce.Models.OrderFile;
+using E_Commerce.Models.ShoppingCart;
+
+namespace E_Commerce.Models.Product
 {
     public class Product_Item
     {
@@ -14,6 +18,9 @@
         public int ProductId { get; set; }
 
         public Product? Product { get; set; }
+        public  ICollection<FavouriteListItems>? FavouriteListItems { get; set; }
+        public ICollection<ShoppingCartItems>? ShoppingCartItems { get; set; }
+        public ICollection<OrderLine>? OrderLines { get; set; }
 
 
     }
