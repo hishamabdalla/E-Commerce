@@ -1,7 +1,10 @@
-﻿using  E_Commerce.Models.OrderFile;
+﻿using E_Commerce.Models.Favourite;
+using  E_Commerce.Models.OrderFile;
+using E_Commerce.Models.Payment;
+using E_Commerce.Models.ShoppingCartFile;
 
 
-namespace E_Commerce.Models.User
+namespace E_Commerce.Models.UserFile
 {
     public class User
     {
@@ -23,5 +26,8 @@ namespace E_Commerce.Models.User
 
         public virtual ICollection<UserAddresses>? UserAddresses { get; set; }
         public virtual ICollection<Order>? Order {  get; set; }
+        public ICollection<FavouriteList>? FavouriteLists { get; set; }
+        public ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; }
+        public ICollection<ShoppingCart>? ShoppingCarts { get; set; }
     }
 }

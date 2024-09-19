@@ -1,4 +1,4 @@
-﻿namespace E_Commerce.Models.User
+﻿namespace E_Commerce.Models.UserFile
 {
     public class UserAddress
     {

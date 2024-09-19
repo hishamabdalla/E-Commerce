@@ -1,14 +1,13 @@
 ﻿using E_Commerce.Models.UserFile;
 
-namespace E_Commerce.Models.Favourite
+namespace E_Commerce.Models.ShoppingCartFile
 {
-    public class FavouriteList
+    public class ShoppingCart
     {
         public int Id { get; set; }
         [ForeignKey("User")]
         public int UserId { get; set; }
         public User? User { get; set; }
-        public ICollection<FavouriteListItems>? FavouriteListItems { get; set; }
-        
+        public ICollection<ShoppingCartItems>? ShoppingCartItems { get; set; }
     }
 }
