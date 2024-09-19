@@ -1,6 +1,6 @@
 ﻿using E_Commerce.Models.Favourite;
 using E_Commerce.Models.OrderFile;
-using E_Commerce.Models.ShoppingCart;
+using E_Commerce.Models.ShoppingCartFile;
 
 namespace E_Commerce.Models.Product
 {
