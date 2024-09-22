@@ -5,7 +5,7 @@ namespace E_Commerce.Models.OrderFile
     public class OrderLine
     {
         public int Id { get; set; }
-        [ForeignKey("Product")]
+        [ForeignKey("Products")]
         public int ProductItemId { get; set; }
 
         public int OrderId { get; set; }

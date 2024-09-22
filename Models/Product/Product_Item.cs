@@ -14,7 +14,7 @@ namespace E_Commerce.Models.Product
         public string Image { get; set; }
         public double Price { get; set; }
 
-        [ForeignKey("Product")]
+        //[ForeignKey("Products")]
         public int ProductId { get; set; }
 
         public Product? Product { get; set; }

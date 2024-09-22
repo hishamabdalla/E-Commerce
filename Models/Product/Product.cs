@@ -7,10 +7,10 @@
         public string Description { get; set; }
         public string Image { get; set; }
 
-        [ForeignKey("Category")]
+        //[ForeignKey("Category")]
         public int CategoryId { get; set; }
 
-        public ProductCategories? Category { get; set; }
+        public ProductCategorie? Category { get; set; }
 
         public ICollection<Product_Item>? Items { get; set; }
     }
