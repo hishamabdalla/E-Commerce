@@ -13,6 +13,10 @@ namespace E_Commerce.Data.Configurations.UserConfigurations
 
             builder.Property(g => g.OrderPrice)
                 .IsRequired();
+
+            builder.HasMany(g => g.UserAddresses)
+                .WithOne(a => a.Governorate)
+                .HasForeignKey(a => a.GovernorateID);
         }
     }
 }
