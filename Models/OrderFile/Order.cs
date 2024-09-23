@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Models.Payment;
+using E_Commerce.Models.UserFile;
 
 namespace E_Commerce.Models.OrderFile
 {
@@ -21,6 +22,7 @@ namespace E_Commerce.Models.OrderFile
         public DateOnly OrderDate { get; set; }
 
         public double TotalPrice { get; set; }
+        public User? User { get; set; }
         public UserPaymentMethod? UserPaymentMethod { get; set; }
     }
 }
