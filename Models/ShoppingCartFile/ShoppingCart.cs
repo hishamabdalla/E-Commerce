@@ -6,7 +6,7 @@ namespace E_Commerce.Models.ShoppingCartFile
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public User? User { get; set; }
-        public ICollection<ShoppingCartItems>? ShoppingCartItems { get; set; }
+        public virtual User? User { get; set; }
+        public virtual ICollection<ShoppingCartItems>? ShoppingCartItems { get; set; }
     }
 }
