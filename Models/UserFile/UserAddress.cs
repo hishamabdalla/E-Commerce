@@ -12,9 +12,8 @@
 
         public int? UnitNumber { get; set; }
 
-        [ForeignKey("Governorate")]
         public int GovernorateID { get; set; }
 
-        public Governorate Governorate { get; set; }
+        public virtual Governorate? Governorate { get; set; }
     }
 }

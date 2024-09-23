@@ -20,6 +20,7 @@ namespace E_Commerce.Data.Configurations.UserConfigurations
             builder.Property(a => a.PostalCode)
                 .IsRequired();
 
+            builder.HasOne(a => a.Governorate);
         }
     }
 }
