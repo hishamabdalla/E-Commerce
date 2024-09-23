@@ -5,12 +5,10 @@ namespace E_Commerce.Models.ShoppingCartFile
     public class ShoppingCartItems
     {
         public int Id { get; set; }
-        [ForeignKey("ShoppingCart")]
         public int ShoppingCartId { get; set; }
-        [ForeignKey("Products")]
         public int ProductItemId { get; set; }
         public int Quantity { get; set; }
-        public Product_Item? Product { get; set; }
-        public ShoppingCart? ShoppingCart { get; set; }
+        public virtual Product_Item? Product { get; set; }
+        public virtual ShoppingCart? ShoppingCart { get; set; }
     }
 }

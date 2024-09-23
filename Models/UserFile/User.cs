@@ -14,6 +14,8 @@ namespace E_Commerce.Models.UserFile
 
         public string LastName { get; set; }
 
+        public string UserName { get; set; }
+
         public string Email { get; set; }
 
         public string Password { get; set; }
@@ -25,9 +27,9 @@ namespace E_Commerce.Models.UserFile
         public int Age { get; set; }
 
         public virtual ICollection<UserAddresses>? UserAddresses { get; set; }
-        public virtual ICollection<Order>? Order {  get; set; }
-        public ICollection<FavouriteList>? FavouriteLists { get; set; }
-        public ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; }
-        public ICollection<ShoppingCart>? ShoppingCarts { get; set; }
+        public virtual ICollection<Order>? Orders {  get; set; }
+        public virtual ICollection<FavouriteList>? FavouriteLists { get; set; }
+        public virtual ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; }
+        public virtual ICollection<ShoppingCart>? ShoppingCarts { get; set; }
     }
 }
