@@ -31,5 +31,7 @@ namespace E_Commerce.Models.UserFile
         public virtual ICollection<FavouriteList>? FavouriteLists { get; set; }
         public virtual ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; }
         public virtual ICollection<ShoppingCart>? ShoppingCarts { get; set; }
+        public virtual ICollection<ProductItemReview>? ProductItemReviews { get; set; }
+
     }
 }
