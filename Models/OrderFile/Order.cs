@@ -17,12 +17,19 @@ namespace E_Commerce.Models.OrderFile
 
         public int ImportancyId { get; set; }
 
-        public string OrderStatus { get; set; }
+        public int OrderStatusId { get; set; }
 
         public DateOnly OrderDate { get; set; }
 
         public double TotalPrice { get; set; }
-        public User? User { get; set; }
-        public UserPaymentMethod? UserPaymentMethod { get; set; }
+
+        public virtual ICollection<OrderLine>? OrderLines { get; set; }
+        public virtual User? User { get; set; }
+        public virtual UserPaymentMethod? UserPaymentMethod { get; set; }
+        public virtual UserAddress? UserAddress { get; set; }//???????????
+        public virtual OrderStatus? OrderStatus { get; set; }
+        public virtual OrderImportancy? OrderImportancy { get; set; }
+        public virtual Tax? Tax { get; set; }
+
     }
 }

@@ -8,7 +8,7 @@ namespace E_Commerce.Models.Favourite
         public int FavouriteListId { get; set; }
         [ForeignKey("Products")]
         public int ProductItemId { get; set; }
-        public Product_Item? Product { get; set; }
-        public FavouriteList? FavouriteList { get; set; }
+        public virtual Product_Item? Product { get; set; }
+        public virtual FavouriteList? FavouriteList { get; set; }
     }
 }

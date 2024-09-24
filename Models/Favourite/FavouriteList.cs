@@ -8,7 +8,7 @@ namespace E_Commerce.Models.Favourite
         [ForeignKey("User")]
         public int UserId { get; set; }
         public User? User { get; set; }
-        public ICollection<FavouriteListItems>? FavouriteListItems { get; set; }
+        public virtual ICollection<FavouriteListItems>? FavouriteListItems { get; set; }
         
     }
 }
