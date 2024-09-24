@@ -2,12 +2,12 @@
 {
     public class CategoryPromotion
     {
-        [ForeignKey("ProductCategories")]
+        //[ForeignKey("ProductCategories")]
         public int CategoryId { get; set; }
-        [ForeignKey("Promotion")]
+        //[ForeignKey("Promotion")]
         public int PromotionId { get; set; }
 
-        public ProductCategorie ProductCategories { get; set; }
-        public Promotion Promotion { get; set; }
+        public virtual ProductCategorie? ProductCategorie { get; set; }
+        public virtual Promotion? Promotion { get; set; }
     }
 }
