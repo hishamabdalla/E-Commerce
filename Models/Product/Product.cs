@@ -12,6 +12,6 @@
 
         public virtual ProductCategorie? Category { get; set; }
 
-        public  virtual ICollection<Product_Item>? Items { get; set; }
+        public virtual ICollection<Product_Item>? Items { get; set; } = new HashSet<Product_Item>();
     }
 }

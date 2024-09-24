@@ -23,10 +23,10 @@ namespace E_Commerce.Models.OrderFile
 
         public double TotalPrice { get; set; }
 
-        public virtual ICollection<OrderLine>? OrderLines { get; set; }
+        public virtual ICollection<OrderLine>? OrderLines { get; set; } = new HashSet<OrderLine>();
         public virtual User? User { get; set; }
         public virtual UserPaymentMethod? UserPaymentMethod { get; set; }
-        public virtual UserAddress? UserAddress { get; set; }//???????????
+        public virtual UserAddress? UserAddress { get; set; }
         public virtual OrderStatus? OrderStatus { get; set; }
         public virtual OrderImportancy? OrderImportancy { get; set; }
         public virtual Tax? Tax { get; set; }

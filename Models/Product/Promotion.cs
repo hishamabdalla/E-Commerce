@@ -12,7 +12,7 @@
 
         public int DiscountRate { get; set; }
 
-        public virtual ICollection<CategoryPromotion>? PromotionCategories { get; set; }
+        public virtual ICollection<CategoryPromotion>? PromotionCategories { get; set; } = new HashSet<CategoryPromotion>();
 
     }
 }

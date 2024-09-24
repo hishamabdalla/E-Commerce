@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public int OrderPrice { get; set; }
 
-        public virtual ICollection<UserAddress>? UserAddresses { get; set; }
+        public virtual ICollection<UserAddress>? UserAddresses { get; set; } = new HashSet<UserAddress>();
     }
 }

@@ -23,6 +23,6 @@ namespace E_Commerce.Models.Payment
         /// Navigation Properties
         public virtual PaymentType? PaymentType { get; set; }
         public virtual User? User { get; set; }
-        public virtual ICollection<Order>? Orders { get; set; }
+        public virtual ICollection<Order>? Orders { get; set; } = new HashSet<Order>();
     }
 }
