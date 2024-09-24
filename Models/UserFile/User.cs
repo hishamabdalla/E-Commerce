@@ -26,10 +26,10 @@ namespace E_Commerce.Models.UserFile
 
         public int Age { get; set; }
 
-        public virtual ICollection<UserAddresses>? UserAddresses { get; set; }
-        public virtual ICollection<Order>? Orders {  get; set; }
-        public virtual ICollection<FavouriteList>? FavouriteLists { get; set; }
-        public virtual ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; }
-        public virtual ICollection<ShoppingCart>? ShoppingCarts { get; set; }
+        public virtual ICollection<UserAddresses>? UserAddresses { get; set; } = new HashSet<UserAddresses>();
+        public virtual ICollection<Order>? Orders { get; set; } = new HashSet<Order>();
+        public virtual ICollection<FavouriteList>? FavouriteLists { get; set; } = new HashSet<FavouriteList>();
+        public virtual ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; } = new HashSet<UserPaymentMethod>();
+        public virtual ICollection<ShoppingCart>? ShoppingCarts { get; set; } = new HashSet<ShoppingCart>();
     }
 }

@@ -16,6 +16,6 @@ namespace E_Commerce.Models.OrderFile
         public virtual Product_Item? Product { get; set; }
         public virtual Order? Order { get; set; }
 
-        public virtual ICollection<ProductItemReview>? ProductItemReviews { get; set; }
+        public virtual ICollection<ProductItemReview>? ProductItemReviews { get; set; } = new HashSet<ProductItemReview>();
     }
 }

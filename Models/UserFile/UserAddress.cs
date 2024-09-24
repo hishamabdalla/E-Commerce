@@ -13,7 +13,7 @@
         public int? UnitNumber { get; set; }
 
         public int GovernorateID { get; set; }
-        public virtual ICollection<UserAddresses>? UserAddresses { get; set; }
+        public virtual ICollection<UserAddresses>? UserAddresses { get; set; } = new HashSet<UserAddresses>();
         public virtual Governorate? Governorate { get; set; }
     }
 }
