@@ -17,10 +17,10 @@ namespace E_Commerce.Models.Product
         //[ForeignKey("Products")]
         public int ProductId { get; set; }
 
-        public Product? Product { get; set; }
-        public  ICollection<FavouriteListItems>? FavouriteListItems { get; set; }
-        public ICollection<ShoppingCartItems>? ShoppingCartItems { get; set; }
-        public ICollection<OrderLine>? OrderLines { get; set; }
+        public virtual Product? Product { get; set; }
+        public  virtual ICollection<FavouriteListItems>? FavouriteListItems { get; set; }
+        public virtual ICollection<ShoppingCartItems>? ShoppingCartItems { get; set; }
+        public virtual ICollection<OrderLine>? OrderLines { get; set; }
 
 
     }

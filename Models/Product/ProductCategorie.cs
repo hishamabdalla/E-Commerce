@@ -9,8 +9,8 @@
         public int ParentCategoryId { get; set; }
 
         public virtual ProductCategorie? ParentCategory { get; set; }
-        public ICollection<CategoryPromotion>? PromotionCategories { get; set; }
-        public ICollection<Product>? Products { get; set; }
+        public virtual ICollection<CategoryPromotion>? PromotionCategories { get; set; }
+        public virtual ICollection<Product>? Products { get; set; }
 
     }
 }

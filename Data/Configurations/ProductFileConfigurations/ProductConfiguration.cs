@@ -21,7 +21,7 @@ namespace E_Commerce.Data.Configurations.ProductFileConfigurations
             // The RelationShip Products with Category (Many To One)
             builder.HasOne(c => c.Category)
                 .WithMany(p => p.Products)
-                .HasForeignKey(p => p.Id);
+                .HasForeignKey(p => p.CategoryId);
             
 
                 
