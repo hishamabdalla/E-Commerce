@@ -10,8 +10,8 @@
         //[ForeignKey("Category")]
         public int CategoryId { get; set; }
 
-        public virtual ProductCategorie? Category { get; set; }
+        public virtual ProductCategory? Category { get; set; }
 
-        public virtual ICollection<Product_Item>? Items { get; set; } = new HashSet<Product_Item>();
+        public virtual ICollection<ProductItem>? Items { get; set; } = new HashSet<ProductItem>();
     }
 }

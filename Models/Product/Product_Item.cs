@@ -4,7 +4,7 @@ using E_Commerce.Models.ShoppingCartFile;
 
 namespace E_Commerce.Models.Product
 {
-    public class Product_Item
+    public class ProductItem
     {
         public int Id { get; set; }
         public string SKU { get; set; }

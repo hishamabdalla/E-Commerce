@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace E_Commerce.Data.Configurations.ProductFileConfigurations
 {
-    public class CategorieConfigurations : IEntityTypeConfiguration<ProductCategorie>
+    public class CategorieConfigurations : IEntityTypeConfiguration<ProductCategory>
     {
-        public void Configure(EntityTypeBuilder<ProductCategorie> builder)
+        public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
             builder.Property(c => c.Name)
                 .HasMaxLength(100)

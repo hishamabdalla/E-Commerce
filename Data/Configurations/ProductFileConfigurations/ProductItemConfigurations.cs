@@ -4,9 +4,9 @@ using Microsoft.Identity.Client;
 
 namespace E_Commerce.Data.Configurations.ProductFileConfigurations
 {
-    public class ProductItemConfigurations : IEntityTypeConfiguration<Product_Item>
+    public class ProductItemConfigurations : IEntityTypeConfiguration<ProductItem>
     {
-        public void Configure(EntityTypeBuilder<Product_Item> builder)
+        public void Configure(EntityTypeBuilder<ProductItem> builder)
         {
             builder.Property(i => i.SKU)
                 .HasMaxLength(100)
