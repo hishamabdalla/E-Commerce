@@ -27,25 +27,7 @@ namespace E_Commerce.Data.Configurations.UserConfigurations
             builder.Property(u => u.DateOfBirth)
                 .IsRequired();
 
-            builder.HasMany(u => u.UserAddresses)
-                .WithOne(a => a.User)
-                .HasForeignKey(a => a.UserId);
-
-            builder.HasMany(u => u.Orders)
-                .WithOne(o => o.User)
-                .HasForeignKey(o => o.UserId);
-
-            builder.HasMany(u => u.FavouriteLists)
-                .WithOne(f => f.User)
-                .HasForeignKey(f => f.UserId);
-
-            builder.HasMany(u => u.UserPaymentMethods)
-                .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId);
-
-            builder.HasMany(u => u.ShoppingCarts)
-                .WithOne(s => s.User)
-                .HasForeignKey(s => s.UserId);
+          
         }
     }
 }

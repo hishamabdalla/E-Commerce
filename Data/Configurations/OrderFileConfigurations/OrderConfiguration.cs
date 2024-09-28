@@ -32,33 +32,29 @@ namespace E_Commerce.Data.Configurations.OrderFileConfigurations
 
             
             builder.HasOne(o => o.User)
-                   .WithMany() 
+                   .WithMany(u => u.Orders) 
                    .HasForeignKey(o => o.UserId);
 
             builder.HasOne(o => o.UserPaymentMethod)
-                   .WithMany() 
+                   .WithMany(u => u.Orders) 
                    .HasForeignKey(o => o.PaymentMethodId);
 
             builder.HasOne(o => o.UserAddress)
-                   .WithMany() 
+                   .WithMany(a => a.Orders) 
                    .HasForeignKey(o => o.AddressId);
 
             builder.HasOne(o => o.OrderStatus)
-                   .WithMany() 
+                   .WithMany(s=>s.Orders) 
                    .HasForeignKey(o => o.OrderStatusId);
 
             builder.HasOne(o => o.OrderImportancy)
-                   .WithMany() 
+                   .WithMany(i => i.Orders) 
                    .HasForeignKey(o => o.ImportancyId);
 
             builder.HasOne(o => o.Tax)
-                   .WithMany() 
+                   .WithMany(t => t.Orders) 
                    .HasForeignKey(o => o.TaxId);
 
-            
-            builder.HasMany(o => o.OrderLines)
-                   .WithOne() 
-                   .HasForeignKey(o=>o.OrderId); 
         }
     }
 }

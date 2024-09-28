@@ -11,9 +11,6 @@ namespace E_Commerce.Data.Configurations.ShoppingCartConfigurations
                 .WithMany(u => u.ShoppingCarts)
                 .HasForeignKey(s => s.UserId);
 
-            builder.HasMany(s => s.ShoppingCartItems)
-                .WithOne(si => si.ShoppingCart)
-                .HasForeignKey(si => si.ShoppingCartId);
         }
     }
 }

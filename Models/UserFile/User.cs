@@ -28,8 +28,10 @@ namespace E_Commerce.Models.UserFile
 
         public virtual ICollection<UserAddresses>? UserAddresses { get; set; }
         public virtual ICollection<Order>? Orders {  get; set; }
-        public virtual ICollection<FavouriteList>? FavouriteLists { get; set; }
-        public virtual ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; }
-        public virtual ICollection<ShoppingCart>? ShoppingCarts { get; set; }
+        public virtual ICollection<FavouriteListItems>? FavouriteListItems { get; set; } = new HashSet<FavouriteListItems>();
+
+        public virtual ICollection<ProductItemReview> ProductItemReviews { get; set; } = new HashSet<ProductItemReview>();
+        public virtual ICollection<UserPaymentMethod>? UserPaymentMethods { get; set; } = new HashSet<UserPaymentMethod>();
+        public virtual ICollection<ShoppingCart>? ShoppingCarts { get; set; } = new HashSet<ShoppingCart>();
     }
 }

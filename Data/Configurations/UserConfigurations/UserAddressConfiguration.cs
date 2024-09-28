@@ -20,9 +20,6 @@ namespace E_Commerce.Data.Configurations.UserConfigurations
             builder.Property(a => a.PostalCode)
                 .IsRequired();
             
-            builder.HasMany(a => a.UserAddresses)
-                .WithOne(ads => ads.UserAddress)
-                .HasForeignKey(ads => ads.AddressId);
 
             builder.HasOne(a => a.Governorate)
                 .WithMany(g => g.UserAddresses)

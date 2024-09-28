@@ -6,9 +6,9 @@ namespace E_Commerce.Models.Payment
     public class UserPaymentMethod
     {
         public int Id { get; set; }
-        public string Provider { get; set; }
+        public string Provider { get; set; } = null!;
         [MinLength(16)]
-        public string AccountNumber { get; set; }
+        public string AccountNumber { get; set; } = null!;
         public DateOnly ExpireDate { get; set; }
         public bool IsDefault { get; set; }
 

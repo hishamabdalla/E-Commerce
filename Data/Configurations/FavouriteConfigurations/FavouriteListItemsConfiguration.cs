@@ -10,16 +10,16 @@ namespace E_Commerce.Data.Configurations.FavouriteConfiguration
             builder.HasKey(f => new
             {
                 f.ProductItemId,
-                f.FavouriteListId
+                f.UserId
             }); 
 
-            builder.HasOne(p => p.Product)
+            builder.HasOne(p => p.ProductItem)
                 .WithMany(f => f.FavouriteListItems)
                 .HasForeignKey(f => f.ProductItemId);
 
-            builder.HasOne(p => p.FavouriteList)
+            builder.HasOne(p => p.User)
                .WithMany(f => f.FavouriteListItems)
-               .HasForeignKey(f => f.FavouriteListId);
+               .HasForeignKey(f => f.UserId);
 
           
         }

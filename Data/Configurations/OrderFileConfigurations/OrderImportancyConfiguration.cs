@@ -18,9 +18,6 @@ namespace E_Commerce.Data.Configurations.OrderFileConfigurations
             builder.Property(o => o.Price)
                   .IsRequired();
 
-            builder.HasMany(o => o.Orders)
-                .WithOne(i => i.OrderImportancy)
-                .HasForeignKey(o => o.ImportancyId);
         }
     }
 }

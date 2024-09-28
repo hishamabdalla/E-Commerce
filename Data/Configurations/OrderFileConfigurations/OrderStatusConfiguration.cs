@@ -11,10 +11,6 @@ namespace E_Commerce.Data.Configurations.OrderFileConfigurations
 
             builder.Property(os=>os.Name)
                 .IsRequired();
-
-            builder.HasMany(os => os.Orders)
-                .WithOne(o => o.OrderStatus)
-                .HasForeignKey(o => o.OrderStatusId);
         }
     }
 }

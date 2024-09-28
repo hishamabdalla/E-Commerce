@@ -19,9 +19,6 @@ namespace E_Commerce.Data.Configurations.OrderFileConfigurations
                    .WithMany(o => o.OrderLines)
                    .HasForeignKey(ol => ol.OrderId);
 
-            builder.HasMany(ol => ol.ProductItemReviews)
-                   .WithOne(pir => pir.OrderLine)
-                   .HasForeignKey(pir => pir.OrderLineId);
 
             builder.Property(ol => ol.Quantity)
                 .IsRequired();
