@@ -28,12 +28,14 @@ namespace E_Commerce.Data.Configurations.OrderFileConfigurations
 
             builder.Property(o => o.TotalPrice)
                    .IsRequired() 
-                   .HasColumnType("decimal(10,2)"); 
+                   .HasColumnType("decimal(10,2)");
 
-            
+
             builder.HasOne(o => o.User)
-                   .WithMany(u => u.Orders) 
-                   .HasForeignKey(o => o.UserId);
+                   .WithMany(u => u.Orders)
+                   .HasForeignKey(o => o.UserId)
+                   .OnDelete(DeleteBehavior.Restrict);
+                   
 
             builder.HasOne(o => o.UserPaymentMethod)
                    .WithMany(u => u.Orders) 

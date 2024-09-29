@@ -13,9 +13,9 @@ namespace E_Commerce.Data.Configurations.ProductFileConfigurations
 
             // self relationship (many to one)
             builder.HasOne(c => c.ParentCategory)
-                .WithMany()
+                .WithMany(c=>c.ChildCategories)
                 .HasForeignKey(c => c.ParentCategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); 
         }
     }
 }

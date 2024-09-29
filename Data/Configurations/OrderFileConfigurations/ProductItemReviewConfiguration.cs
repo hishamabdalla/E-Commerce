@@ -15,7 +15,9 @@ namespace E_Commerce.Data.Configurations.OrderFileConfigurations
 
             builder.HasOne(pir => pir.User)
                .WithMany(u => u.ProductItemReviews)
-               .HasForeignKey(pir => pir.UserId);
+               .HasForeignKey(pir => pir.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
+
 
         }
     }
