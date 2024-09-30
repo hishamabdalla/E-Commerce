@@ -9,6 +9,8 @@ namespace E_Commerce.DataAccessDataAccess.Repository.IRepository
     public interface IUnitOfWork
     {
         public IProductRepository Product { get; }
+        public ICategoryRepository Category { get; }
+
         void Save();
     }
 }
