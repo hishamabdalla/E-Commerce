@@ -1,5 +1,4 @@
-﻿using E_Commerce.Models.Product;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.DataAccessDataAccess.Repository.IRepository
 {
-    public interface IProductRepository : IRepository<Product>
+    public interface IUnitOfWork
     {
-        void Update(Product product);
+        public IProductRepository productRepository { get; }
+        void Save();
     }
 }

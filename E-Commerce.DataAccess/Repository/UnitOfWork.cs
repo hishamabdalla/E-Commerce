@@ -1,6 +1,5 @@
 ﻿using E_Commerce.DataAccess.Data;
 using E_Commerce.DataAccessDataAccess.Repository.IRepository;
-using E_Commerce.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +8,21 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.DataAccessDataAccess.Repository
 {
-    public class ProductRepository : Repository<Product>, IProductRepository
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext db;
 
-        public ProductRepository(ApplicationDbContext db) : base(db)
+        public IProductRepository productRepository { get; private set; }
+
+        public UnitOfWork(ApplicationDbContext db)
         {
             this.db = db;
+            productRepository = new ProductRepository(db);
         }
-        public void Update(Product product)
+
+        public void Save()
         {
-            db.Products.Update(product);
+            db.SaveChanges();
         }
     }
 }
