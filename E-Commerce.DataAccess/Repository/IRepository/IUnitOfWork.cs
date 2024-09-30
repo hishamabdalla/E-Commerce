@@ -8,7 +8,7 @@ namespace E_Commerce.DataAccessDataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        public IProductRepository productRepository { get; }
+        public IProductRepository Product { get; }
         void Save();
     }
 }
