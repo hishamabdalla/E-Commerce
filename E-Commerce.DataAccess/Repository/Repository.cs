@@ -1,5 +1,6 @@
 ﻿using E_Commerce.DataAccess.Data;
 using E_Commerce.DataAccessDataAccess.Repository.IRepository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,16 +26,33 @@ namespace E_Commerce.DataAccessDataAccess.Repository
             _dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
-            IQueryable<T> query = _dbSet;
-            query = query.Where(filter);
+            IQueryable<T> query = _dbSet.Where(filter);
+
+            if (includeProperties is not null)
+            {
+                foreach (var property in includeProperties.Split(", ", StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
+            }
+
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = _dbSet;
+
+            if (includeProperties is not null)
+            {
+                foreach (var property in includeProperties.Split(", ", StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
+            }
+
             return query.ToList();
         }
 

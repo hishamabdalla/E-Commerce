@@ -14,7 +14,13 @@ namespace E_Commerce.DataAccessData.Configurations.ProductFileConfigurations
             builder.HasOne(c => c.ParentCategory)
                 .WithMany(c=>c.ChildCategories)
                 .HasForeignKey(c => c.ParentCategoryId)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasData(
+                new Category() { Id = 1, Name = "Shirts" },
+                new Category() { Id = 2, Name = "Shoes" },
+                new Category() { Id = 3, Name = "Jackets" }
+                );
         }
     }
 }

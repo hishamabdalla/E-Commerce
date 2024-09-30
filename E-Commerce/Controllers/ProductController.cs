@@ -16,7 +16,7 @@ namespace E_Commerce.Controllers
         }
         public IActionResult Index()
         {
-            return View(unitOfWork.Product.GetAll().ToList());
+            return View(unitOfWork.Product.GetAll("Category").ToList());
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace E_Commerce.Controllers
         {
             ProductWithCategorySelectListVM productVM = new()
             {
-                Product = (id != 0 || id is not null) ? unitOfWork.Product.Get(p => p.Id == id) : new Product(),
+                Product = (id == 0 || id is not null) ? unitOfWork.Product.Get(p => p.Id == id, "Category") : new Product(),
                 // categorylist
                 CategoryList = unitOfWork.Category.GetAll().Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() })
             };
@@ -60,10 +60,10 @@ namespace E_Commerce.Controllers
             return View(productVM);
         }
 
-        [HttpDelete]
+        [HttpGet]
         public IActionResult Delete(int id)
         {
-            Product product = unitOfWork.Product.Get(p => p.Id == id);
+            Product product = unitOfWork.Product.Get(p => p.Id == id, "Category");
             if (product is null)
                 return NotFound();
             

@@ -1,4 +1,4 @@
-﻿@model Product
+﻿ @model Product
 @{
     ViewData["Title"] = "Delete";
 }
@@ -22,7 +22,7 @@
 
             <div class="mb-3 row p-1">
                 <label asp-for="CategoryId" class="p-0"></label>
-                <input asp-for="CategoryId" disabled value="@Model.Category.Name" />
+                <input asp-for="CategoryId" type="text" disabled value="@Model.Category.Name" />
             </div>
             <div class="row">
                 <div class="col-6 col-md-3">
