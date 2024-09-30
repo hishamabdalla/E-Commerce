@@ -2,6 +2,7 @@
 using E_Commerce.Models.Product;
 using Microsoft.AspNetCore.Mvc;
 using E_Commerce.DataAccessDataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace E_Commerce.Controllers
 {
@@ -15,7 +16,7 @@ namespace E_Commerce.Controllers
         }
         public IActionResult Index()
         {
-            return View(unitOfWork.Product.GetAll());
+            return View(unitOfWork.Product.GetAll().ToList());
         }
 
         [HttpGet]
@@ -23,8 +24,9 @@ namespace E_Commerce.Controllers
         {
             ProductWithCategorySelectListVM productVM = new()
             {
-                Product = (id != 0 || id is not null) ? unitOfWork.Product.Get(p => p.Id == id): new Product(),
+                Product = (id != 0 || id is not null) ? unitOfWork.Product.Get(p => p.Id == id) : new Product(),
                 // categorylist
+                CategoryList = unitOfWork.Category.GetAll().Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() })
             };
             return View(productVM);
         }
@@ -54,6 +56,7 @@ namespace E_Commerce.Controllers
                 return RedirectToAction(nameof(Index));
             }
             // categorylist
+            productVM.CategoryList = unitOfWork.Category.GetAll().Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
             return View(productVM);
         }
 
