@@ -1,4 +1,4 @@
-using E_Commerce.Data;
+using E_Commerce.DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
