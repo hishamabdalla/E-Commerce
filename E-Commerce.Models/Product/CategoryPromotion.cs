@@ -7,7 +7,7 @@
         //[ForeignKey("Promotion")]
         public int PromotionId { get; set; }
 
-        public virtual ProductCategory? ProductCategory { get; set; }
+        public virtual Category? Category { get; set; }
         public virtual Promotion? Promotion { get; set; }
     }
 }

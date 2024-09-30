@@ -24,7 +24,7 @@ namespace E_Commerce.DataAccess.Data
         public DbSet<CategoryPromotion> CategoryPromotions { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductItem> ProductItems { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<UserPaymentMethod>  UserPaymentMethods { get; set; }

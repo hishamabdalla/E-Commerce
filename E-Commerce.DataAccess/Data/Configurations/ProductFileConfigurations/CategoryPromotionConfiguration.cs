@@ -10,7 +10,7 @@ namespace E_Commerce.DataAccessData.Configurations.ProductFileConfigurations
                 .WithMany(promotion => promotion.PromotionCategories)
                 .HasForeignKey(cp => cp.PromotionId);
 
-            builder.HasOne(cp => cp.ProductCategory)
+            builder.HasOne(cp => cp.Category)
                 .WithMany(pc => pc.PromotionCategories)
                 .HasForeignKey(cp => cp.CategoryId);
 
