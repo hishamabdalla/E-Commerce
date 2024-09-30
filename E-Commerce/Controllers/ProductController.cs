@@ -38,10 +38,16 @@ namespace E_Commerce.Controllers
                 {
                     //update
                     unitOfWork.Product.Update(productVM.Product);
-                }
-                // add
-                unitOfWork.Product.Add(productVM.Product);
+                    TempData["Update"] = "Product Updated Successfully";
 
+                }
+                else
+                {
+                    // add
+                    unitOfWork.Product.Add(productVM.Product);
+                    TempData["Success"] = "Product created Successfully";
+                }
+               
                 // save
                 unitOfWork.Save();
 
@@ -61,12 +67,13 @@ namespace E_Commerce.Controllers
             return View(product);
         }
 
-        [HttpPost, ActionName("DeleteBehavior")]
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeleteProduct(int id)
         {
             // delete
             Product product = unitOfWork.Product.Get(c => c.Id == id);
             unitOfWork.Product.Remove(product);
+            TempData["Success"] = "Product deleted Successfully";
             unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
