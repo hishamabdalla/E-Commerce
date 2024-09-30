@@ -12,12 +12,12 @@ namespace E_Commerce.DataAccessDataAccess.Repository
     {
         private readonly ApplicationDbContext db;
 
-        public IProductRepository productRepository { get; private set; }
+        public IProductRepository Product { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             this.db = db;
-            productRepository = new ProductRepository(db);
+            Product = new ProductRepository(db);
         }
 
         public void Save()
