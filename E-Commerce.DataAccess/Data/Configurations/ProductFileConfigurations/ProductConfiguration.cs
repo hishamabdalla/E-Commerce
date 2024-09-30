@@ -13,9 +13,7 @@ namespace E_Commerce.DataAccessData.Configurations.ProductFileConfigurations
             builder.Property(p => p.Description)
                 .HasMaxLength(500);
 
-            builder.Property(p => p.Image)
-                .IsRequired()
-                .HasMaxLength(250);
+           
 
             // The RelationShip Products with Category (Many To One)
             builder.HasOne(c => c.Category)
