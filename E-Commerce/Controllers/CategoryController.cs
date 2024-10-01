@@ -55,7 +55,7 @@ namespace E_Commerce.Controllers
             }
             var categoryFromDb = _unitOfWork.Category.Get(c => c.Id == id);
 
-            IEnumerable<SelectListItem> ParentCategoryList = _unitOfWork.Category.GetParant()
+            IEnumerable<SelectListItem> ParentCategoryList = _unitOfWork.Category.GetAll( "ParentCategory")
              .Select(u => new SelectListItem
              {
                  Text = u.Name,
