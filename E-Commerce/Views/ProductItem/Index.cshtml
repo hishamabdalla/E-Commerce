@@ -1,0 +1,67 @@
+﻿@model List<ProductItem>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">Product Item List</h2>
+        </div>
+
+        <div class="col-6 text-end">
+            <a asp-controller="ProductItem" asp-action="Upsert" class="btn btn-secondary">
+                <i class="bi bi-plus-circle-dotted"></i>  Create New Product Item
+            </a>
+        </div>
+
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Category
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var productItem in Model)
+            {
+                <tr>
+                    <td>
+                        @productItem.SKU
+                    </td>
+                    <td>
+                        @productItem.QuantityInStock
+                    </td>
+                    <td>
+                        @productItem.Product.Name
+                    </td>
+
+
+                    <td>
+                        <a asp-controller="ProductItem" asp-action="Upsert" asp-route-id="@productItem.Id" class="btn btn-info mx-2">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="ProductItem" asp-action="Delete" asp-route-id="@productItem.Id" class="btn btn-danger mx-2">
+                            <i class="bi bi-trash-fill"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

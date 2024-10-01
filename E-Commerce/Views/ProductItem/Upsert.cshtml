@@ -1,0 +1,56 @@
+﻿@model ProductItemWithProductSelectListVM
+@{
+    ViewData["Title"] = "Upsert";
+}
+
+<form asp-action="Upsert" method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">@((Model.ProductItem.Id == 0) ? "Create" : "Update") Product Item</h2>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="mb-3 row p-1">
+                    <input type="hidden" asp-for="ProductItem.Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3 row p-1">
+                        <label asp-for="ProductItem.SKU" class="p-0"></label>
+                        <input asp-for="ProductItem.SKU" class="form-control" />
+                        <span asp-validation-for="ProductItem.SKU" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 row p-1">
+                        <label asp-for="ProductItem.Price" class="p-0"></label>
+                        <input asp-for="ProductItem.Price" class="form-control">
+                        <span asp-validation-for="ProductItem.Price" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3 row p-1">
+                        <label asp-for="ProductItem.ProductId" class="p-0"></label>
+                        <select asp-for="ProductItem.ProductId" asp-items="@Model.ProductList" class="form-control">
+                            <option selected>--Select Product--</option>
+                        </select>
+                        <span asp-validation-for="ProductItem.ProductId" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">@((Model.ProductItem.Id == 0) ? "Create" : "Update")</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="ProductItem" asp-action="Index" class="btn btn-dark border  form-control">
+                        Back to List
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
