@@ -21,6 +21,8 @@ namespace E_Commerce.DataAccessData.Configurations.ProductFileConfigurations
                 new Category() { Id = 2, Name = "Shoes" },
                 new Category() { Id = 3, Name = "Jackets" }
                 );
+
+
         }
     }
 }
