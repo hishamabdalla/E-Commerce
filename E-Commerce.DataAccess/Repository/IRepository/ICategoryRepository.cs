@@ -9,6 +9,8 @@ namespace E_Commerce.DataAccessDataAccess.Repository.IRepository
 {
     public interface ICategoryRepository:IRepository<Category>
     {
+        
         void Update(Category category);
+
     }
 }
