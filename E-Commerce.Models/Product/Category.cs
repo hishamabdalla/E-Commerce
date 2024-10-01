@@ -1,10 +1,12 @@
-﻿namespace E_Commerce.Models.Product
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace E_Commerce.Models.Product
 {
     public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        [Display (Name = "Parent Category")]
         public int? ParentCategoryId { get; set; }
         public virtual Category? ParentCategory { get; set; }
         public virtual ICollection<Category> ChildCategories { get; set; } = new HashSet<Category>();
