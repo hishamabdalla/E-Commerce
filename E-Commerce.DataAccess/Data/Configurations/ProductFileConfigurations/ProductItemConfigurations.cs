@@ -14,8 +14,7 @@ namespace E_Commerce.DataAccessData.Configurations.ProductFileConfigurations
                 .IsRequired();
 
             builder.Property(i => i.Image)
-                .HasMaxLength(250)
-                .IsRequired();
+                .HasMaxLength(250);
 
             builder.Property(i => i.Price)
                 .HasColumnType("decimal(9, 2)");
