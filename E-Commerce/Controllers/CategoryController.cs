@@ -1,6 +1,7 @@
 ﻿using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models.Product;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace E_Commerce.Controllers
 {
@@ -15,11 +16,20 @@ namespace E_Commerce.Controllers
         public IActionResult Index()
         {
             List<Category> CategoryList = _unitOfWork.Category.GetAll().ToList();
+          
             return View(CategoryList);
         }
 
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> ParentCategoryList = _unitOfWork.Category.GetAll("ParentCategory")
+              .Select(u => new SelectListItem
+              {
+                  Text = u.Name,
+                  Value = u.Id.ToString()
+
+              });
+            ViewBag.ParentCategoryList = ParentCategoryList;
             return View();
         }
 
@@ -38,11 +48,21 @@ namespace E_Commerce.Controllers
         }
         public IActionResult Edit(int? id)
         {
+
             if (id == null || id == 0)
             {
                 return NotFound();
             }
             var categoryFromDb = _unitOfWork.Category.Get(c => c.Id == id);
+
+            IEnumerable<SelectListItem> ParentCategoryList = _unitOfWork.Category.GetAll( "ParentCategory")
+             .Select(u => new SelectListItem
+             {
+                 Text = u.Name,
+                 Value = u.Id.ToString()
+
+             });
+            ViewBag.ParentCategoryList = ParentCategoryList;
             return View(categoryFromDb);
         }
         [HttpPost]
@@ -65,7 +85,9 @@ namespace E_Commerce.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _unitOfWork.Category.Get(c => c.Id == id);
+            var categoryFromDb = _unitOfWork.Category.Get(c => c.Id == id, "ParentCategory");
+          
+            
             return View(categoryFromDb);
         }
         [HttpPost, ActionName("Delete")]

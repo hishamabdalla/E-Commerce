@@ -18,6 +18,9 @@ namespace E_Commerce.DataAccessDataAccess.Repository
             this._context = context;
         }
 
+
+       
+      
         public void Update(Category category)
         {
             _context.Categories.Update(category);
