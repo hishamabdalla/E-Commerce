@@ -1,5 +1,6 @@
 ﻿using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models.Product;
+using E_Commerce.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -20,65 +21,53 @@ namespace E_Commerce.Controllers
             return View(CategoryList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            IEnumerable<SelectListItem> ParentCategoryList = _unitOfWork.Category.GetAll("ParentCategory")
-              .Select(u => new SelectListItem
-              {
-                  Text = u.Name,
-                  Value = u.Id.ToString()
+            CategoryVM categoryVM = new()
+            {
+                Category = (id == 0 || id !=null) ? _unitOfWork.Category.Get(c => c.Id == id, "ParentCategory") : new Category(),
+                CategoryList = _unitOfWork.Category.GetAll("ParentCategory").Select(u => new SelectListItem
+                {
+                    Value = u.Id.ToString(),
+                    Text = u.Name
+                }),
 
-              });
-            ViewBag.ParentCategoryList = ParentCategoryList;
-            return View();
+            };
+            
+            return View(categoryVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category)
+        public IActionResult Upsert(CategoryVM categoryVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Category.Add(category);
+                if (categoryVM.Category.Id != 0)
+                {
+                    _unitOfWork.Category.Update(categoryVM.Category);
+                    TempData["success"] = "Category Updated Successfully";
+                    
+                }
+                else
+                {
+                    _unitOfWork.Category.Add(categoryVM.Category);
+                    TempData["success"] = "Category Created Successfully";
+                }
                 _unitOfWork.Save();
-                TempData["success"] = "Category Created Successfully";
                 return RedirectToAction("Index");
-            }
-            return View(category);
-        }
-        public IActionResult Edit(int? id)
-        {
 
-            if (id == null || id == 0)
+            }
+            categoryVM.CategoryList = _unitOfWork.Category.GetAll("ParentCategory").Select(u => new SelectListItem
             {
-                return NotFound();
-            }
-            var categoryFromDb = _unitOfWork.Category.Get(c => c.Id == id);
+                Value = u.Id.ToString(),
+                Text = u.Name
+            });
 
-            IEnumerable<SelectListItem> ParentCategoryList = _unitOfWork.Category.GetAll( "ParentCategory")
-             .Select(u => new SelectListItem
-             {
-                 Text = u.Name,
-                 Value = u.Id.ToString()
-
-             });
-            ViewBag.ParentCategoryList = ParentCategoryList;
-            return View(categoryFromDb);
+            return View(categoryVM);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Category.Update(category);
-                _unitOfWork.Save();
-                TempData["success"] = "Category Updated Successfully";
-                return RedirectToAction("Index");
-            }
-            return View(category);
-        }
-
+        
+        
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
