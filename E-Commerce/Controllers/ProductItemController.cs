@@ -31,7 +31,7 @@ namespace E_Commerce.Controllers
         {
             ProductItemWithProductSelectListVM ProductItemVM = new ProductItemWithProductSelectListVM()
             {
-                ProductItem = (id == 0 || id is null) ? unitOfWork.ProductItem.Get(pi => pi.Id == id, "Product") : new ProductItem(),
+                ProductItem = (id == 0 || id is not null) ? unitOfWork.ProductItem.Get(pi => pi.Id == id, "Product") : new ProductItem(),
                 ProductList = unitOfWork.Product.GetAll().Select(p => new SelectListItem { Text = p.Name, Value = p.Id.ToString() })
 
             };
