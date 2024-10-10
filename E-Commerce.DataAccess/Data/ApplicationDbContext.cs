@@ -5,18 +5,20 @@ using E_Commerce.Models.Payment;
 using E_Commerce.Models.Product;
 using E_Commerce.Models.ShoppingCartFile;
 using E_Commerce.Models.UserFile;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace E_Commerce.DataAccess.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
          : base(options)
         {
         }
-        public DbSet<User> Users { get; set; }
+        
         public DbSet<UserAddress> UsersAddresses { get; set; }
         public DbSet<UserAddresses> UserAddressesList  { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
