@@ -6,7 +6,7 @@ namespace E_Commerce.Models.OrderFile
     {
         public int Id { get; set; }
         public int OrderLineId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int Rating { get; set; }
         public string? Comment { get; set; }
 

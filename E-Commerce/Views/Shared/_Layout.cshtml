@@ -19,23 +19,29 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="ProductItem" asp-action="Index">ProductItem</a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-area ="" asp-controller="Product" asp-action="Index" class="dropdown-item">Products</a></li>
+                                    <li><a asp-area="" asp-controller="Category" asp-action="Index" class="dropdown-item">Category</a></li>
+                                    <li><a asp-area ="" asp-controller="ProductItem" asp-action="Index" class="dropdown-item">ProductItem</a></li>
+
+                                </ul>
+                            </div>
+                        }
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

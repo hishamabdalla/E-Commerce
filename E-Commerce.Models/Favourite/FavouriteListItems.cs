@@ -5,7 +5,7 @@ namespace E_Commerce.Models.Favourite
 {
     public class FavouriteListItems
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int ProductItemId { get; set; }
         public virtual ProductItem? ProductItem { get; set; }
         public virtual User? User { get; set; }

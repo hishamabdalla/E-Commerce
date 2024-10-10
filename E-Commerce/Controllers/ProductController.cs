@@ -3,9 +3,12 @@ using E_Commerce.Models.Product;
 using Microsoft.AspNetCore.Mvc;
 using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Commerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class ProductController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

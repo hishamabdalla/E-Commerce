@@ -17,7 +17,7 @@ namespace E_Commerce.Models.Payment
         //[ForeignKey("PaymentType")]
         public int PaymentTypeId { get; set; }
         //[ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         /// Navigation Properties
         public virtual PaymentType? PaymentType { get; set; }

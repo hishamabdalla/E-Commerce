@@ -1,6 +1,7 @@
 ﻿using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models.Product;
 using E_Commerce.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Identity.Client;
@@ -8,6 +9,8 @@ using Newtonsoft.Json.Linq;
 
 namespace E_Commerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class ProductItemController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
