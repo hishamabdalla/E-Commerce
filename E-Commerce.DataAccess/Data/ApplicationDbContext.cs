@@ -18,7 +18,8 @@ namespace E_Commerce.DataAccess.Data
          : base(options)
         {
         }
-        
+        public DbSet<User> Users { get; set; }
+
         public DbSet<UserAddress> UsersAddresses { get; set; }
         public DbSet<UserAddresses> UserAddressesList  { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
