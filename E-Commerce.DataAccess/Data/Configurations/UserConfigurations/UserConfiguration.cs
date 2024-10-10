@@ -20,8 +20,6 @@ namespace E_Commerce.DataAccessData.Configurations.UserConfigurations
             builder.Property(u => u.Email)
                 .IsRequired();
 
-           
-
             builder.Property(u => u.DateOfBirth)
                 .IsRequired();
 

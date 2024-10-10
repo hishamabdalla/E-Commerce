@@ -107,6 +107,19 @@ namespace E_Commerce.Areas.Identity.Pages.Account
             public string? Role {  get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList {  get; set; }
+
+            public string UserName { get; set; }
+
+            public string FirstName { get; set; }
+
+            public string LastName { get; set; }
+
+            public string? Phone { get; set; }
+
+            public DateOnly DateOfBirth { get; set; }
+
+            
+
         }
 
 
@@ -139,15 +152,38 @@ namespace E_Commerce.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+              
                 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.PhoneNumber=Input.Phone;
+                user.DateOfBirth = Input.DateOfBirth;
+                
+                var today = DateOnly.FromDateTime(DateTime.Today);
+                int age = today.Year - Input.DateOfBirth.Year;
+
+                if (Input.DateOfBirth > today.AddYears(-age))
+                {
+                    age--;
+                }
+                user.Age = age;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    if(!String.IsNullOrEmpty(Input.Role))
+                    {
+                       await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Customer");
+
+                    }
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -176,6 +212,14 @@ namespace E_Commerce.Areas.Identity.Pages.Account
                 }
             }
 
+            Input = new()
+            {
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
             // If we got this far, something failed, redisplay form
             return Page();
         }
