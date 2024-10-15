@@ -34,7 +34,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavouriteListItems");
+                    b.ToTable("FavouriteListItems", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.OrderFile.Order", b =>
@@ -197,7 +197,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Taxes");
+                    b.ToTable("Taxes", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.PaymentType", b =>
@@ -215,7 +215,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentTypes");
+                    b.ToTable("PaymentTypes", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.UserPaymentMethod", b =>
@@ -255,7 +255,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPaymentMethods");
+                    b.ToTable("UserPaymentMethods", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Category", b =>
@@ -281,7 +281,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -313,7 +313,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategoryPromotions");
+                    b.ToTable("CategoryPromotions", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Product", b =>
@@ -344,7 +344,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.ProductItem", b =>
@@ -377,7 +377,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductItem");
+                    b.ToTable("ProductItem", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Promotion", b =>
@@ -407,7 +407,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Promotions");
+                    b.ToTable("Promotions", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCart", b =>
@@ -434,7 +434,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ProductItemId");
 
-                    b.ToTable("ShoppingCart");
+                    b.ToTable("ShoppingCart", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.Governorate", b =>
@@ -455,7 +455,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governorate");
+                    b.ToTable("Governorate", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddress", b =>
@@ -492,7 +492,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("GovernorateID");
 
-                    b.ToTable("UsersAddresses");
+                    b.ToTable("UsersAddresses", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddresses", b =>
@@ -507,7 +507,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("UserAddressesList");
+                    b.ToTable("UserAddressesList", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
