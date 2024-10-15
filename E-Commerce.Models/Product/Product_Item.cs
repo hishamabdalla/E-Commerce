@@ -19,7 +19,7 @@ namespace E_Commerce.Models.Product
 
         public virtual Product? Product { get; set; }
         public virtual ICollection<FavouriteListItems>? FavouriteListItems { get; set; } = new HashSet<FavouriteListItems>();
-        public virtual ICollection<ShoppingCartItems>? ShoppingCartItems { get; set; } = new HashSet<ShoppingCartItems>();
+        public virtual ICollection<ShoppingCart>? ShoppingCart { get; set; } = new HashSet<ShoppingCart>();
         public virtual ICollection<OrderLine>? OrderLines { get; set; } = new HashSet<OrderLine>();
 
 

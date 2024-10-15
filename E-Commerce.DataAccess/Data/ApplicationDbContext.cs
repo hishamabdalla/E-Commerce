@@ -22,8 +22,7 @@ namespace E_Commerce.DataAccess.Data
 
         public DbSet<UserAddress> UsersAddresses { get; set; }
         public DbSet<UserAddresses> UserAddressesList  { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public DbSet<ShoppingCartItems> ShoppingCartItems { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<CategoryPromotion> CategoryPromotions { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductItem> ProductItems { get; set; }

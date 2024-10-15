@@ -29,7 +29,7 @@ namespace E_Commerce.Controllers
             CategoryVM categoryVM = new()
             {
                 Category = (id != 0 || id !=null) ? _unitOfWork.Category.Get(c => c.Id == id, "ParentCategory") : new Category(),
-                CategoryList = _unitOfWork.Category.GetAll("ParentCategory").Select(u => new SelectListItem
+                CategoryList = _unitOfWork.Category.GetAll(includeProperties:"ParentCategory").Select(u => new SelectListItem
                 {
                     Value = u.Id.ToString(),
                     Text = u.Name
@@ -61,7 +61,7 @@ namespace E_Commerce.Controllers
                 return RedirectToAction("Index");
 
             }
-            categoryVM.CategoryList = _unitOfWork.Category.GetAll("ParentCategory").Select(u => new SelectListItem
+            categoryVM.CategoryList = _unitOfWork.Category.GetAll(includeProperties: "ParentCategory").Select(u => new SelectListItem
             {
                 Value = u.Id.ToString(),
                 Text = u.Name

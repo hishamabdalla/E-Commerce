@@ -34,7 +34,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavouriteListItems");
+                    b.ToTable("FavouriteListItems", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.OrderFile.Order", b =>
@@ -197,7 +197,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Taxes");
+                    b.ToTable("Taxes", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.PaymentType", b =>
@@ -215,7 +215,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentTypes");
+                    b.ToTable("PaymentTypes", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.UserPaymentMethod", b =>
@@ -255,7 +255,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPaymentMethods");
+                    b.ToTable("UserPaymentMethods", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Category", b =>
@@ -278,7 +278,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -310,7 +310,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategoryPromotions");
+                    b.ToTable("CategoryPromotions", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Product", b =>
@@ -338,7 +338,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.ProductItem", b =>
@@ -371,7 +371,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductItem");
+                    b.ToTable("ProductItem", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Promotion", b =>
@@ -401,7 +401,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Promotions");
+                    b.ToTable("Promotions", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCart", b =>
@@ -412,24 +412,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("ApplicaitonUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCartItems", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ProductItemId")
                         .HasColumnType("int");
@@ -437,16 +422,13 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShoppingCartId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicaitonUserId");
 
                     b.HasIndex("ProductItemId");
 
-                    b.HasIndex("ShoppingCartId");
-
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShoppingCart", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.Governorate", b =>
@@ -467,7 +449,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governorate");
+                    b.ToTable("Governorate", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddress", b =>
@@ -504,7 +486,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("GovernorateID");
 
-                    b.ToTable("UsersAddresses");
+                    b.ToTable("UsersAddresses", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddresses", b =>
@@ -519,7 +501,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("UserAddressesList");
+                    b.ToTable("UserAddressesList", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -935,31 +917,20 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
             modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCart", b =>
                 {
                     b.HasOne("E_Commerce.Models.UserFile.User", "User")
-                        .WithMany("ShoppingCarts")
-                        .HasForeignKey("UserId")
+                        .WithMany()
+                        .HasForeignKey("ApplicaitonUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCartItems", b =>
-                {
                     b.HasOne("E_Commerce.Models.Product.ProductItem", "Product")
-                        .WithMany("ShoppingCartItems")
+                        .WithMany("ShoppingCart")
                         .HasForeignKey("ProductItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("E_Commerce.Models.ShoppingCartFile.ShoppingCart", "ShoppingCart")
-                        .WithMany("ShoppingCartItems")
-                        .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
 
-                    b.Navigation("ShoppingCart");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddress", b =>
@@ -1098,17 +1069,12 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.Navigation("OrderLines");
 
-                    b.Navigation("ShoppingCartItems");
+                    b.Navigation("ShoppingCart");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Promotion", b =>
                 {
                     b.Navigation("PromotionCategories");
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCart", b =>
-                {
-                    b.Navigation("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.Governorate", b =>
@@ -1130,8 +1096,6 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("ProductItemReviews");
-
-                    b.Navigation("ShoppingCarts");
 
                     b.Navigation("UserAddresses");
 

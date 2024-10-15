@@ -35,7 +35,6 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -269,25 +268,6 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCarts_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -394,7 +374,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SKU = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     QuantityInStock = table.Column<int>(type: "int", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -514,28 +494,28 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShoppingCartItems",
+                name: "ShoppingCart",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
                     ProductItemId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    ApplicaitonUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingCartItems", x => x.Id);
+                    table.PrimaryKey("PK_ShoppingCart", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ShoppingCartItems_ProductItem_ProductItemId",
-                        column: x => x.ProductItemId,
-                        principalTable: "ProductItem",
+                        name: "FK_ShoppingCart_AspNetUsers_ApplicaitonUserId",
+                        column: x => x.ApplicaitonUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShoppingCartItems_ShoppingCarts_ShoppingCartId",
-                        column: x => x.ShoppingCartId,
-                        principalTable: "ShoppingCarts",
+                        name: "FK_ShoppingCart_ProductItem_ProductItemId",
+                        column: x => x.ProductItemId,
+                        principalTable: "ProductItem",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -721,19 +701,14 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCartItems_ProductItemId",
-                table: "ShoppingCartItems",
+                name: "IX_ShoppingCart_ApplicaitonUserId",
+                table: "ShoppingCart",
+                column: "ApplicaitonUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCart_ProductItemId",
+                table: "ShoppingCart",
                 column: "ProductItemId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCartItems_ShoppingCartId",
-                table: "ShoppingCartItems",
-                column: "ShoppingCartId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCarts_UserId",
-                table: "ShoppingCarts",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAddressesList_AddressId",
@@ -784,7 +759,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 name: "ProductItemReviews");
 
             migrationBuilder.DropTable(
-                name: "ShoppingCartItems");
+                name: "ShoppingCart");
 
             migrationBuilder.DropTable(
                 name: "UserAddressesList");
@@ -797,9 +772,6 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderLines");
-
-            migrationBuilder.DropTable(
-                name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "Orders");
