@@ -10,8 +10,9 @@ namespace E_Commerce.DataAccessDataAccess.Repository.IRepository
     {
         public IProductRepository Product { get; }
         public ICategoryRepository Category { get; }
-
         public IProductItemRepository ProductItem { get; }
+        public IShoppingCartRepository ShoppingCart { get; }
+        public IUserRepository User { get; }
 
         void Save();
     }

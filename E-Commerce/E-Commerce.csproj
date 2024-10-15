@@ -31,4 +31,6 @@
     <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
 </Project>

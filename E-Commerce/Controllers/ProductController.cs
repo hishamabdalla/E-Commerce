@@ -19,7 +19,7 @@ namespace E_Commerce.Controllers
         }
         public IActionResult Index()
         {
-            return View(unitOfWork.Product.GetAll("Category").ToList());
+            return View(unitOfWork.Product.GetAll(includeProperties:"Category").ToList());
         }
 
         [HttpGet]

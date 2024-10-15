@@ -26,10 +26,16 @@ namespace E_Commerce.DataAccessDataAccess.Repository
             _dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
         {
-            IQueryable<T> query = _dbSet.Where(filter);
+            IQueryable<T> query;
 
+            if (tracked)
+                query = _dbSet;
+            else
+                query = _dbSet.AsNoTracking();
+
+            query = _dbSet.Where(filter);
             if (includeProperties is not null)
             {
                 foreach (var property in includeProperties.Split(", ", StringSplitOptions.RemoveEmptyEntries))
@@ -37,13 +43,14 @@ namespace E_Commerce.DataAccessDataAccess.Repository
                     query = query.Include(property);
                 }
             }
-
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
             IQueryable<T> query = _dbSet;
+            if(filter != null)
+                query = _dbSet.Where(filter);
 
             if (includeProperties is not null)
             {

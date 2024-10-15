@@ -53,10 +53,17 @@
                         <a asp-controller="ProductItem" asp-action="Upsert" asp-route-id="@productItem.Id" class="btn btn-info mx-2">
                             <i class="bi bi-pencil-square"></i> Edit
                         </a>
-                    </td>
-                    <td>
+                        <a asp-controller="ProductItem" asp-action="Details" asp-route-id="@productItem.Id" class="btn btn-dark">
+                            <i class="bi bi-pencil-square"></i> Details
+                        </a>
                         <a asp-controller="ProductItem" asp-action="Delete" asp-route-id="@productItem.Id" class="btn btn-danger mx-2">
                             <i class="bi bi-trash-fill"></i> Delete
+                        </a>
+                    </td>
+
+                    <td>
+                        <a asp-controller="ProductItem" asp-action="AddToCart" asp-route-id="@productItem.Id" class="btn btn-primary mx-2">
+                            <i class="bi bi-pencil-square"></i> Add To Cart
                         </a>
                     </td>
                 </tr>
