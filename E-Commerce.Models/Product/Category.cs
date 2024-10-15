@@ -6,6 +6,8 @@ namespace E_Commerce.Models.Product
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string? ImageUrl { get; set; }
+
         [Display (Name = "Parent Category")]
         public int? ParentCategoryId { get; set; }
         public virtual Category? ParentCategory { get; set; }

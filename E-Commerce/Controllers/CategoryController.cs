@@ -28,7 +28,7 @@ namespace E_Commerce.Controllers
         {
             CategoryVM categoryVM = new()
             {
-                Category = (id != 0 || id !=null) ? _unitOfWork.Category.Get(c => c.Id == id, "ParentCategory") : new Category(),
+                Category = (id == 0 || id !=null) ? _unitOfWork.Category.Get(c => c.Id == id, "ParentCategory") : new Category(),
                 CategoryList = _unitOfWork.Category.GetAll(includeProperties:"ParentCategory").Select(u => new SelectListItem
                 {
                     Value = u.Id.ToString(),

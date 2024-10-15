@@ -1,8 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿﻿
+@model IEnumerable<Category>
+<!-- Include Bootstrap CSS for styling -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<!-- Link to your custom CSS -->
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<partial name="_Notification" />
+<div class="container mt-5">
+    <div class="row g-3">
+        @foreach (var Category in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-card position-relative">
+                    <div class="position-absolute top-0 start-0 bg-danger text-white p-2 fw-bold" style="z-index: 10; font-size: 0.8rem;">
+                        Sale
+                    </div>
+                    <div class="product-image">
+                        <img src="@Category.ImageUrl" alt="@Category.Name" loading="lazy" />
+                    </div>
+
+                    <div class="product-info">
+                        <h5 class="product-name">@Category.Name</h5>
+
+                        
+                        <a asp-action="Details" asp-route-ProductId="@Category.Id" class="btn btn-dark w-100 rounded-pill" >Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+<!-- Include jQuery and Bootstrap JS for functionality -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

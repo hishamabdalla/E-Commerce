@@ -13,7 +13,7 @@ namespace E_Commerce.DataAccessData.Configurations.ProductFileConfigurations
             builder.Property(i => i.QuantityInStock)
                 .IsRequired();
 
-            builder.Property(i => i.Image)
+            builder.Property(i => i.ImageUrl)
                 .HasMaxLength(250);
 
             builder.Property(i => i.Price)

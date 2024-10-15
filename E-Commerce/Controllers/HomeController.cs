@@ -1,6 +1,7 @@
 using E_Commerce.DataAccessDataAccess.Repository;
 using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models;
+using E_Commerce.Models.Product;
 using E_Commerce.Models.ShoppingCartFile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +14,18 @@ namespace E_Commerce.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
-            this.unitOfWork = unitOfWork;
+            this._unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Category> categoryList = _unitOfWork.Category.GetAll();
+            return View(categoryList);
         }
 
         public IActionResult Privacy()

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.DataAccessDataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241012113800_init")]
-    partial class init
+    [Migration("20241015110816_AddImageToCategoryAndProduct")]
+    partial class AddImageToCategoryAndProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -269,6 +269,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -331,6 +334,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -925,13 +931,13 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("E_Commerce.Models.Product.ProductItem", "Product")
+                    b.HasOne("E_Commerce.Models.Product.ProductItem", "ProductItem")
                         .WithMany("ShoppingCart")
                         .HasForeignKey("ProductItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductItem");
 
                     b.Navigation("User");
                 });

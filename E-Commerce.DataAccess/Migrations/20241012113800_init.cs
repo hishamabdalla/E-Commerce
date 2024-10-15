@@ -374,7 +374,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SKU = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     QuantityInStock = table.Column<int>(type: "int", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Price = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },

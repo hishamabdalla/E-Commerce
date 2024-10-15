@@ -34,7 +34,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavouriteListItems", (string)null);
+                    b.ToTable("FavouriteListItems");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.OrderFile.Order", b =>
@@ -197,7 +197,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Taxes", (string)null);
+                    b.ToTable("Taxes");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.PaymentType", b =>
@@ -215,7 +215,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentTypes", (string)null);
+                    b.ToTable("PaymentTypes");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.UserPaymentMethod", b =>
@@ -255,7 +255,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPaymentMethods", (string)null);
+                    b.ToTable("UserPaymentMethods");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Category", b =>
@@ -265,6 +265,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -278,7 +281,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -310,7 +313,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategoryPromotions", (string)null);
+                    b.ToTable("CategoryPromotions");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Product", b =>
@@ -329,6 +332,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -338,7 +344,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.ProductItem", b =>
@@ -349,7 +355,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Image")
+                    b.Property<string>("ImageUrl")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
@@ -371,7 +377,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductItem", (string)null);
+                    b.ToTable("ProductItem");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Promotion", b =>
@@ -401,7 +407,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Promotions", (string)null);
+                    b.ToTable("Promotions");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCart", b =>
@@ -428,7 +434,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ProductItemId");
 
-                    b.ToTable("ShoppingCart", (string)null);
+                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.Governorate", b =>
@@ -449,7 +455,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governorate", (string)null);
+                    b.ToTable("Governorate");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddress", b =>
@@ -486,7 +492,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("GovernorateID");
 
-                    b.ToTable("UsersAddresses", (string)null);
+                    b.ToTable("UsersAddresses");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddresses", b =>
@@ -501,7 +507,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("UserAddressesList", (string)null);
+                    b.ToTable("UserAddressesList");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -922,13 +928,13 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("E_Commerce.Models.Product.ProductItem", "Product")
+                    b.HasOne("E_Commerce.Models.Product.ProductItem", "ProductItem")
                         .WithMany("ShoppingCart")
                         .HasForeignKey("ProductItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductItem");
 
                     b.Navigation("User");
                 });

@@ -154,7 +154,7 @@ namespace E_Commerce.Areas.Identity.Pages.Account
                 var user = CreateUser();
               
                 
-                await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
