@@ -11,7 +11,8 @@ using System.Security.Claims;
 
 namespace E_Commerce.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
+    [Authorize]
 
     public class ProductItemController : Controller
     {
