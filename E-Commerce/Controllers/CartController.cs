@@ -53,7 +53,7 @@ namespace E_Commerce.Controllers
             ShoppingCartVM = new()
             {
                 ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicaitonUserId == UserId, includeProperties: "ProductItem"),
-                Order = new()
+                Order=new()
             };
             ShoppingCartVM.Order.User = _unitOfWork.User.Get(u => u.Id == UserId);
 

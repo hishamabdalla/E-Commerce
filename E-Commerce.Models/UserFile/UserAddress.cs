@@ -8,8 +8,9 @@ namespace E_Commerce.Models.UserFile
 
         public string City { get; set; } = string.Empty;
         public string Region { get; set; } = string.Empty;
+        public string State { get; set; }
 
-        public int? StreetNumber { get; set; }
+        public string StreetAddress { get; set; }
         public string PostalCode { get; set; } = string.Empty;
 
         public int? UnitNumber { get; set; }
