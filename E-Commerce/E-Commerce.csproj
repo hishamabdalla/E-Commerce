@@ -29,6 +29,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="wwwroot\images\Category\" />
+    <Folder Include="wwwroot\images\Products\" />
+    <Folder Include="wwwroot\images\ProductItems\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
