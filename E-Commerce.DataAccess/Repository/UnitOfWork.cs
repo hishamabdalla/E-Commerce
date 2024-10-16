@@ -18,6 +18,8 @@ namespace E_Commerce.DataAccessDataAccess.Repository
         public IProductItemRepository ProductItem { get; private set; }
         public IShoppingCartRepository ShoppingCart { get; private set; }
         public IUserRepository User { get; private set; }
+        public IOrderLineRepository OrderLine { get; private set; }
+        public IOrderRepository Order { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -27,6 +29,8 @@ namespace E_Commerce.DataAccessDataAccess.Repository
             ProductItem = new ProductItemRepository(db);
             ShoppingCart = new ShoppingCartRepository(db);
             User = new UserRepository(db);
+            OrderLine = new OrderLineRepository(db);
+            Order = new OrderRepository(db);
         }
 
         public void Save()

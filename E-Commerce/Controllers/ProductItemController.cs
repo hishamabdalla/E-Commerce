@@ -16,10 +16,13 @@ namespace E_Commerce.Controllers
     public class ProductItemController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment; // Class-level variable
 
-        public ProductItemController(IUnitOfWork _unitOfWork)
+
+        public ProductItemController(IUnitOfWork _unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             this.unitOfWork = _unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -41,12 +44,25 @@ namespace E_Commerce.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductItemWithProductSelectListVM ProductItemVM)
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ProductItemWithProductSelectListVM ProductItemVM, IFormFile ImageFile)
         {
             if (ModelState.IsValid)
             {
+                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/ProductItems");
+                string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                string extension = Path.GetExtension(ImageFile.FileName);
+                string filePath = Path.Combine(uploadDir, fileName + extension);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    ImageFile.CopyTo(fileStream); // Synchronous operation
+                }
+
+                ProductItemVM.ProductItem.ImageUrl = "/images/ProductItems/" + fileName + extension;
+
                 // update
-                if(ProductItemVM.ProductItem.Id != 0)
+                if (ProductItemVM.ProductItem.Id != 0)
                 {
                     unitOfWork.ProductItem.Update(ProductItemVM.ProductItem);
                     TempData["Update"] = "Product Item Updated Successfully";
