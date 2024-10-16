@@ -27,6 +27,11 @@ namespace E_Commerce.Controllers
             IEnumerable<Category> categoryList = _unitOfWork.Category.GetAll();
             return View(categoryList);
         }
+        public IActionResult ProductIndex(int?id)
+        {
+            IEnumerable<Product> ProductList = _unitOfWork.Product.GetAll(p=>p.CategoryId==id,includeProperties:"Category");
+            return View(ProductList);
+        }
 
         public IActionResult Privacy()
         {

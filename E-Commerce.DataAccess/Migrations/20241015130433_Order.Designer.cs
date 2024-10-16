@@ -4,6 +4,7 @@ using E_Commerce.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.DataAccessDataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241015130433_Order")]
+    partial class Order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavouriteListItems", (string)null);
+                    b.ToTable("FavouriteListItems");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.OrderFile.Order", b =>
@@ -45,26 +48,74 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("ImportancyId")
+                    b.Property<string>("Carrier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ImportancyId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("OrderDate")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("OrderStatusId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("OrderTotal")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateOnly>("PaymentDueDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("OrderStatusId")
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PaymentMethodId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("PaymentMethodId")
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ShippingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TaxId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TaxId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(10,2)");
+                    b.Property<string>("TrackingNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -197,7 +248,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Taxes", (string)null);
+                    b.ToTable("Taxes");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.PaymentType", b =>
@@ -215,7 +266,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentTypes", (string)null);
+                    b.ToTable("PaymentTypes");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Payment.UserPaymentMethod", b =>
@@ -255,7 +306,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPaymentMethods", (string)null);
+                    b.ToTable("UserPaymentMethods");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Category", b =>
@@ -281,7 +332,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -313,7 +364,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategoryPromotions", (string)null);
+                    b.ToTable("CategoryPromotions");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Product", b =>
@@ -344,7 +395,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.ProductItem", b =>
@@ -377,7 +428,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductItem", (string)null);
+                    b.ToTable("ProductItem");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Product.Promotion", b =>
@@ -407,7 +458,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Promotions", (string)null);
+                    b.ToTable("Promotions");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.ShoppingCartFile.ShoppingCart", b =>
@@ -434,7 +485,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("ProductItemId");
 
-                    b.ToTable("ShoppingCart", (string)null);
+                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.Governorate", b =>
@@ -455,7 +506,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Governorate", (string)null);
+                    b.ToTable("Governorate");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddress", b =>
@@ -492,7 +543,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("GovernorateID");
 
-                    b.ToTable("UsersAddresses", (string)null);
+                    b.ToTable("UsersAddresses");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.UserFile.UserAddresses", b =>
@@ -507,7 +558,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("UserAddressesList", (string)null);
+                    b.ToTable("UserAddressesList");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -771,9 +822,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasOne("E_Commerce.Models.OrderFile.OrderImportancy", "OrderImportancy")
                         .WithMany("Orders")
-                        .HasForeignKey("ImportancyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImportancyId");
 
                     b.HasOne("E_Commerce.Models.OrderFile.OrderStatus", "OrderStatus")
                         .WithMany("Orders")
@@ -789,9 +838,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasOne("E_Commerce.Models.OrderFile.Tax", "Tax")
                         .WithMany("Orders")
-                        .HasForeignKey("TaxId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TaxId");
 
                     b.HasOne("E_Commerce.Models.UserFile.User", "User")
                         .WithMany("Orders")
