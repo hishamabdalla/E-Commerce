@@ -15,8 +15,6 @@ namespace E_Commerce.Models.ShoppingCartFile
         public int Quantity { get; set; }
         public string ApplicaitonUserId { get; set; }
 
-
-
         public virtual ProductItem? ProductItem { get; set; }
 
         [ForeignKey("ApplicaitonUserId")]
