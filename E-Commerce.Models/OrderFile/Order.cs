@@ -24,6 +24,7 @@ namespace E_Commerce.Models.OrderFile
         public DateTime PaymentDueDate { get; set; }
 
         public string? SessionId { get; set; }
+
         public string? PaymentIntentId { get; set; }
         [Required]
         public string PhoneNumber { get; set; }

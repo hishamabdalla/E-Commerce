@@ -7,6 +7,7 @@ using E_Commerce.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace E_Commerce.Controllers
@@ -128,6 +129,41 @@ namespace E_Commerce.Controllers
                     _unitOfWork.Save();
                 }
             }
+            //it is a regular customer account and we need to capture payment
+            //stripe logic
+            var domain = "https://localhost:7050/";
+            var options = new SessionCreateOptions
+            {
+                SuccessUrl = domain + $"Cart/OrderConfirmation?id={ShoppingCartVM.Order.Id}",
+                CancelUrl = domain + "Cart/index",
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment",
+            };
+            foreach (var item in ShoppingCartVM.ShoppingCartList)
+            {
+                var sessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(item.Price * 100), // $20.50 => 2050
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = item.ProductItem.SKU
+                        }
+                    },
+                    Quantity = item.Quantity
+                };
+                options.LineItems.Add(sessionLineItem);
+
+            }
+            var service = new SessionService();
+            Session session = service.Create(options);
+            _unitOfWork.Order.UpdateStripePaymentID(ShoppingCartVM.Order.Id, session.Id, session.PaymentIntentId);
+            _unitOfWork.Save();
+            Response.Headers.Add("Location", session.Url);
+            return new StatusCodeResult(303); 
+
             return RedirectToAction(nameof(OrderConfirmation), new {id=ShoppingCartVM.Order.Id});
         }
 
