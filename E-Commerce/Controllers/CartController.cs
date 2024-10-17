@@ -58,7 +58,7 @@ namespace E_Commerce.Controllers
             ShoppingCartVM = new()
             {
                 ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicaitonUserId == UserId, includeProperties: "ProductItem"),
-                Order = new()
+                Order = new Order()
             };
 
             ShoppingCartVM.Order.User = _unitOfWork.User.Get(u => u.Id == UserId);
@@ -131,7 +131,8 @@ namespace E_Commerce.Controllers
             }
             //it is a regular customer account and we need to capture payment
             //stripe logic
-            var domain = "https://localhost:7050/";
+            //var domain = "https://localhost:7050/";
+            var domain = "https://localhost:44355/";
             var options = new SessionCreateOptions
             {
                 SuccessUrl = domain + $"Cart/OrderConfirmation?id={ShoppingCartVM.Order.Id}",
@@ -162,7 +163,7 @@ namespace E_Commerce.Controllers
             _unitOfWork.Order.UpdateStripePaymentID(ShoppingCartVM.Order.Id, session.Id, session.PaymentIntentId);
             _unitOfWork.Save();
             Response.Headers.Add("Location", session.Url);
-            return new StatusCodeResult(303); 
+            //return new StatusCodeResult(303); 
 
             return RedirectToAction(nameof(OrderConfirmation), new {id=ShoppingCartVM.Order.Id});
         }

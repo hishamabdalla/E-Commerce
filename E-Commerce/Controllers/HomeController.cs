@@ -100,7 +100,7 @@ namespace E_Commerce.Controllers
 
             _unitOfWork.Save();
 
-            return RedirectToAction("index"); // ActionName, ControllerName
+            return RedirectToAction("Index"); // ActionName, ControllerName
         }
 
 
