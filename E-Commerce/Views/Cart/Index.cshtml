@@ -40,11 +40,11 @@
                     
                     <div class="row border-bottom pb-3">
                         <div class="d-none d-lg-block col-lg-1 text-center py-2">
-                            <img src="https://placehold.co/600x400" class="rounded" width="100%" />
-                        </div>
-                        <div class="col-12 col-lg-6 pt-md-3">
+                                <img src="@item.ProductItem.ImageUrl" alt="Product Image" class="rounded" width="100%" />
+                         </div>
+                        <div class="col-12 col-lg-6 pt-md-3"> 
                             <h5 class="text-uppercase text-secondary"><strong>@item.ProductItem.SKU</strong></h5>
-                            <p><small>Description</small></p>
+                            <p><small>@item.ProductItem?.Product?.Description</small></p>
                         </div>
                         <div class="col-12  col-lg-5 text-center row">
                             <div class="col-3 text-md-right pt-2 pt-md-4">

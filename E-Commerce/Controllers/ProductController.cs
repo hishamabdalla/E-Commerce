@@ -12,10 +12,12 @@ namespace E_Commerce.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment; // Class-level variable
 
-        public ProductController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             this.unitOfWork = unitOfWork;
+            this._webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -35,11 +37,24 @@ namespace E_Commerce.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductWithCategorySelectListVM productVM)
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ProductWithCategorySelectListVM productVM, IFormFile ImageFile)
         {
             if (ModelState.IsValid)
             {
-                if(productVM.Product.Id != 0)
+                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/Products");
+                string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                string extension = Path.GetExtension(ImageFile.FileName);
+                string filePath = Path.Combine(uploadDir, fileName + extension);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    ImageFile.CopyTo(fileStream); // Synchronous operation
+                }
+
+                productVM.Product.ImageUrl = "/images/Products/" + fileName + extension;
+
+                if (productVM.Product.Id != 0)
                 {
                     //update
                     unitOfWork.Product.Update(productVM.Product);

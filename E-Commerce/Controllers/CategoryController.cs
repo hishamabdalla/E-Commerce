@@ -12,10 +12,11 @@ namespace E_Commerce.Controllers
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public CategoryController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment; // Class-level variable
+        public CategoryController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -42,10 +43,22 @@ namespace E_Commerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(CategoryVM categoryVM)
+        public IActionResult Upsert(CategoryVM categoryVM, IFormFile ImageFile)
         {
             if (ModelState.IsValid)
             {
+                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images/Category");
+                string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
+                string extension = Path.GetExtension(ImageFile.FileName);
+                string filePath = Path.Combine(uploadDir, fileName + extension);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    ImageFile.CopyTo(fileStream); // Synchronous operation
+                }
+
+                categoryVM.Category.ImageUrl = "/images/Category/" + fileName + extension;
+
                 if (categoryVM.Category.Id != 0)
                 {
                     _unitOfWork.Category.Update(categoryVM.Category);
