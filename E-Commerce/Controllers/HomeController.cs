@@ -33,6 +33,31 @@ namespace E_Commerce.Controllers
             return View(ProductList);
         }
 
+        public IActionResult ProductItemIndex(int? id)
+        {
+            IEnumerable<ProductItem> ProductItemList = _unitOfWork.ProductItem.GetAll(p => p.ProductId == id, includeProperties: "Product");
+            return View(ProductItemList);
+        }
+
+        public IActionResult ProductItemDetails(int Id)
+        {
+
+
+            ProductItem productItem = _unitOfWork.ProductItem.Get(p => p.Id == Id, includeProperties: "Product");
+
+            ShoppingCart cart = new()
+            {
+                ProductItem = productItem,
+                Quantity = 1,
+                ProductItemId = Id
+            };
+
+            if (cart.ProductItem == null)
+                return NotFound();
+
+            return View(cart);
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -43,6 +68,41 @@ namespace E_Commerce.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        /// Shopping Cart Confirm Add
+        /// 
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult ConfirmAddToCart(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var UserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicaitonUserId = UserId;
+
+            /// Checking if the user add some product multiple times but in difference requests
+            /// 
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(s => s.ApplicaitonUserId == UserId && s.ProductItemId == shoppingCart.ProductItemId);
+
+            if (cartFromDb != null)
+            {
+                // Shopping Cart Exists
+                cartFromDb.Quantity += shoppingCart.Quantity;
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+            }
+            else
+            {
+                // Add Cart Record
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+            }
+
+            _unitOfWork.Save();
+
+            return RedirectToAction("index"); // ActionName, ControllerName
+        }
+
 
     }
 }
