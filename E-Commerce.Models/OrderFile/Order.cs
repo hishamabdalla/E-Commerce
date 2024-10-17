@@ -12,6 +12,8 @@ namespace E_Commerce.Models.OrderFile
         public int Id { get; set; }
         [ValidateNever]
         public string UserId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual User? User { get; set; }
 
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
@@ -47,7 +49,6 @@ namespace E_Commerce.Models.OrderFile
 
         public int? OrderStatusId { get; set; }
         public virtual ICollection<OrderLine>? OrderLines { get; set; } = new HashSet<OrderLine>();
-        public virtual User? User { get; set; }
         public virtual UserPaymentMethod? UserPaymentMethod { get; set; }
         public virtual UserAddress? UserAddress { get; set; }
         public virtual OrderStatus? OrderStatus { get; set; }

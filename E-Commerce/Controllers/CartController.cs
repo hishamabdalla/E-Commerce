@@ -169,6 +169,30 @@ namespace E_Commerce.Controllers
 
         public IActionResult OrderConfirmation(int id)
         {
+            //Order orderHeader = _unitOfWork.Order.Get(u => u.Id == id, includeProperties: "User");
+            //if (orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
+            //{
+            //    //this is an order by customer
+
+            //    var service = new SessionService();
+            //    Session session = service.Get(orderHeader.SessionId);
+
+            //    if (session.PaymentStatus.ToLower() == "paid")
+            //    {
+            //        _unitOfWork.Order.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
+            //        _unitOfWork.Order.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
+            //        _unitOfWork.Save();
+            //    }
+
+
+            //}
+
+            //List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
+            //    .GetAll(u => u.ApplicaitonUserId == orderHeader.UserId).ToList();
+
+            //_unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
+            //_unitOfWork.Save();
+
             return View(id);
         }
 
