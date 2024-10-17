@@ -75,14 +75,11 @@ namespace E_Commerce.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult ConfirmAddToCart(ShoppingCart shoppingCart, string returnUrl)
+        public IActionResult ConfirmAddToCart(ShoppingCart shoppingCart)
         {
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
-            if (claimsIdentity == null)
-            {
-                return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("ProductItemDetails", new { id = shoppingCart.ProductItemId }) });
-            }
+
             var UserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             shoppingCart.ApplicaitonUserId = UserId;
 
@@ -104,7 +101,6 @@ namespace E_Commerce.Controllers
             }
 
             _unitOfWork.Save();
-
 
             return RedirectToAction("Index"); // ActionName, ControllerName
         }
