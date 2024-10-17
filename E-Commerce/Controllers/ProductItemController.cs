@@ -11,9 +11,8 @@ using System.Security.Claims;
 
 namespace E_Commerce.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [Authorize]
-
     public class ProductItemController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -116,52 +115,5 @@ namespace E_Commerce.Controllers
             return View(P);
         }
 
-
-        public IActionResult AddToCart(int Id)
-        {
-            ProductItem ProductItem = unitOfWork.ProductItem.Get(p => p.Id == Id, "Product");
-
-            ShoppingCart cart = new()
-            {
-                ProductItem = ProductItem,
-                Quantity = 1,
-                ProductItemId = Id
-            };
-
-            if (cart.ProductItem == null)
-                return NotFound();
-
-            return View(cart);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public IActionResult ConfirmAddToCart(ShoppingCart shoppingCart)
-        {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var UserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            shoppingCart.ApplicaitonUserId = UserId;
-
-            /// Checking if the user add some product multiple times but in difference requests
-            /// 
-
-            ShoppingCart cartFromDb = unitOfWork.ShoppingCart.Get(s => s.ApplicaitonUserId == UserId && s.ProductItemId == shoppingCart.ProductItemId);
-
-            if(cartFromDb != null)
-            {
-                // Shopping Cart Exists
-                cartFromDb.Quantity += shoppingCart.Quantity;
-                unitOfWork.ShoppingCart.Update(cartFromDb);
-            }
-            else
-            {
-                // Add Cart Record
-                unitOfWork.ShoppingCart.Add(shoppingCart);
-            }
-
-            unitOfWork.Save();
-
-            return RedirectToAction("Index", "ProductItem"); // ActionName, ControllerName
-        }
     }
 }
