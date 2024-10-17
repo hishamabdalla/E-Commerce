@@ -2,6 +2,7 @@
 
 namespace E_Commerce.Models.OrderFile
 {
+    //Order Details
     public class OrderLine
     {
         public int Id { get; set; }

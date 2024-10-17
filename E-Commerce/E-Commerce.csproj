@@ -20,11 +20,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
+    <PackageReference Include="Stripe.net" Version="46.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\E-Commerce.DataAccess\E-Commerce.DataAccess.csproj" />
     <ProjectReference Include="..\E-Commerce.Models\E-Commerce.Models.csproj" />
+    <ProjectReference Include="..\E-Commerce.Utility\E-Commerce.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

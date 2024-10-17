@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.DataAccessDataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241015130433_Order")]
-    partial class Order
+    [Migration("20241016124140_UpdateOrder")]
+    partial class UpdateOrder
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,74 +48,34 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AddressId")
-                        .IsRequired()
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Carrier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ImportancyId")
+                    b.Property<int>("ImportancyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("OrderStatusId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("OrderTotal")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateOnly>("PaymentDueDate")
+                    b.Property<DateOnly>("OrderDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("PaymentIntentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PaymentMethodId")
-                        .IsRequired()
+                    b.Property<int>("OrderStatusId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ShippingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StreetAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TaxId")
+                    b.Property<int>("TaxId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TrackingNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -533,8 +493,13 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StreetNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UnitNumber")
                         .HasColumnType("int");
@@ -777,6 +742,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
@@ -789,6 +757,15 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -822,7 +799,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasOne("E_Commerce.Models.OrderFile.OrderImportancy", "OrderImportancy")
                         .WithMany("Orders")
-                        .HasForeignKey("ImportancyId");
+                        .HasForeignKey("ImportancyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("E_Commerce.Models.OrderFile.OrderStatus", "OrderStatus")
                         .WithMany("Orders")
@@ -838,7 +817,9 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     b.HasOne("E_Commerce.Models.OrderFile.Tax", "Tax")
                         .WithMany("Orders")
-                        .HasForeignKey("TaxId");
+                        .HasForeignKey("TaxId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("E_Commerce.Models.UserFile.User", "User")
                         .WithMany("Orders")

@@ -6,32 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace E_Commerce.DataAccessDataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Order : Migration
+    public partial class EditOrder : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_OrderImportancies_ImportancyId",
-                table: "Orders");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_Taxes_TaxId",
-                table: "Orders");
-
-            migrationBuilder.RenameColumn(
-                name: "TotalPrice",
-                table: "Orders",
-                newName: "OrderTotal");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "TaxId",
-                table: "Orders",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
-
             migrationBuilder.AlterColumn<DateTime>(
                 name: "OrderDate",
                 table: "Orders",
@@ -40,19 +19,21 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 oldClrType: typeof(DateOnly),
                 oldType: "date");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "ImportancyId",
-                table: "Orders",
-                type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
-
             migrationBuilder.AddColumn<string>(
                 name: "Carrier",
                 table: "Orders",
                 type: "nvarchar(max)",
                 nullable: true);
+            migrationBuilder.AddColumn<string>(
+                name: "PhoneNumber",
+                table: "Orders",
+                type: "nvarchar(max)",
+                nullable: false);
+            migrationBuilder.AddColumn<string>(
+                name: "Name",
+                table: "Orders",
+                type: "nvarchar(max)",
+                nullable: false);
 
             migrationBuilder.AddColumn<string>(
                 name: "City",
@@ -62,11 +43,10 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "Name",
+                name: "OrderStatuss",
                 table: "Orders",
                 type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "PaymentDate",
@@ -75,12 +55,12 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
-            migrationBuilder.AddColumn<DateOnly>(
+            migrationBuilder.AddColumn<DateTime>(
                 name: "PaymentDueDate",
                 table: "Orders",
-                type: "date",
+                type: "datetime2",
                 nullable: false,
-                defaultValue: new DateOnly(1, 1, 1));
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<string>(
                 name: "PaymentIntentId",
@@ -95,18 +75,17 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "PhoneNumber",
+                name: "PostalCode",
                 table: "Orders",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "PostalCode",
+                name: "SessionId",
                 table: "Orders",
                 type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "ShippingDate",
@@ -134,33 +113,11 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 table: "Orders",
                 type: "nvarchar(max)",
                 nullable: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_OrderImportancies_ImportancyId",
-                table: "Orders",
-                column: "ImportancyId",
-                principalTable: "OrderImportancies",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_Taxes_TaxId",
-                table: "Orders",
-                column: "TaxId",
-                principalTable: "Taxes",
-                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_OrderImportancies_ImportancyId",
-                table: "Orders");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_Taxes_TaxId",
-                table: "Orders");
-
             migrationBuilder.DropColumn(
                 name: "Carrier",
                 table: "Orders");
@@ -170,7 +127,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 table: "Orders");
 
             migrationBuilder.DropColumn(
-                name: "Name",
+                name: "OrderStatuss",
                 table: "Orders");
 
             migrationBuilder.DropColumn(
@@ -190,11 +147,11 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 table: "Orders");
 
             migrationBuilder.DropColumn(
-                name: "PhoneNumber",
+                name: "PostalCode",
                 table: "Orders");
 
             migrationBuilder.DropColumn(
-                name: "PostalCode",
+                name: "SessionId",
                 table: "Orders");
 
             migrationBuilder.DropColumn(
@@ -212,21 +169,6 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
             migrationBuilder.DropColumn(
                 name: "TrackingNumber",
                 table: "Orders");
-
-            migrationBuilder.RenameColumn(
-                name: "OrderTotal",
-                table: "Orders",
-                newName: "TotalPrice");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "TaxId",
-                table: "Orders",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
 
             migrationBuilder.AlterColumn<DateOnly>(
                 name: "OrderDate",
@@ -235,32 +177,6 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 nullable: false,
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "ImportancyId",
-                table: "Orders",
-                type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_OrderImportancies_ImportancyId",
-                table: "Orders",
-                column: "ImportancyId",
-                principalTable: "OrderImportancies",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_Taxes_TaxId",
-                table: "Orders",
-                column: "TaxId",
-                principalTable: "Taxes",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
     }
 }

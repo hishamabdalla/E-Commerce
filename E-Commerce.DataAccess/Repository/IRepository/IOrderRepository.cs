@@ -12,6 +12,7 @@ namespace E_Commerce.DataAccessDataAccess.Repository.IRepository
     {
         
         void Update(Order obj);
-
+        void UpdateStatus(int id, string orderStatus, string? paymentStatus = null);
+        void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId);
     }
 }
