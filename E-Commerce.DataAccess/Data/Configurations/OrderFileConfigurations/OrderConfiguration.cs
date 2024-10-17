@@ -19,8 +19,8 @@ namespace E_Commerce.DataAccessData.Configurations.OrderFileConfigurations
             builder.Property(o => o.AddressId)
                    .IsRequired(); 
 
-            builder.Property(o => o.OrderStatusId)
-                   .IsRequired(); 
+           builder.Property(o => o.OrderStatusId)
+                .IsRequired(); 
 
             builder.Property(o => o.OrderDate)
                    .IsRequired(); 
@@ -44,9 +44,9 @@ namespace E_Commerce.DataAccessData.Configurations.OrderFileConfigurations
                    .WithMany(a => a.Orders) 
                    .HasForeignKey(o => o.AddressId);
 
-            builder.HasOne(o => o.OrderStatus)
-                   .WithMany(s=>s.Orders) 
-                   .HasForeignKey(o => o.OrderStatusId);
+            //builder.HasOne(o => o.OrderStatus)
+            //       .WithMany(s=>s.Orders) 
+            //       .HasForeignKey(o => o.OrderStatusId);
 
             builder.HasOne(o => o.OrderImportancy)
                    .WithMany(i => i.Orders) 

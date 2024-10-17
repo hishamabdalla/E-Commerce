@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Models.Payment;
 using E_Commerce.Models.UserFile;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +10,7 @@ namespace E_Commerce.Models.OrderFile
     public class Order
     {
         public int Id { get; set; }
-
+        [ValidateNever]
         public string UserId { get; set; }
 
         public DateTime OrderDate { get; set; }
@@ -37,18 +38,13 @@ namespace E_Commerce.Models.OrderFile
         [Required]
         public string Name { get; set; }
 
+        public int? AddressId { get; set; }
 
+        public int? TaxId { get; set; }
+        public int? PaymentMethodId { get; set; }
+        public int? ImportancyId { get; set; }
 
-
-
-
-        public int AddressId { get; set; }
-
-        public int TaxId { get; set; }
-        public int PaymentMethodId { get; set; }
-        public int ImportancyId { get; set; }
-
-        public int OrderStatusId { get; set; }
+        public int? OrderStatusId { get; set; }
         public virtual ICollection<OrderLine>? OrderLines { get; set; } = new HashSet<OrderLine>();
         public virtual User? User { get; set; }
         public virtual UserPaymentMethod? UserPaymentMethod { get; set; }

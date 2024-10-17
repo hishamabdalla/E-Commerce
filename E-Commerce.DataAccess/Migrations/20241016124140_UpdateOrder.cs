@@ -14,21 +14,21 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 name: "StreetNumber",
                 table: "UsersAddresses");
 
-            migrationBuilder.DropColumn(
-                name: "City",
-                table: "Orders");
+            //migrationBuilder.DropColumn(
+            //    name: "City",
+            //    table: "Orders");
 
-            migrationBuilder.DropColumn(
-                name: "PostalCode",
-                table: "Orders");
+            //migrationBuilder.DropColumn(
+            //    name: "PostalCode",
+            //    table: "Orders");
 
-            migrationBuilder.DropColumn(
-                name: "State",
-                table: "Orders");
+            //migrationBuilder.DropColumn(
+            //    name: "State",
+            //    table: "Orders");
 
-            migrationBuilder.DropColumn(
-                name: "StreetAddress",
-                table: "Orders");
+            //migrationBuilder.DropColumn(
+            //    name: "StreetAddress",
+            //    table: "Orders");
 
             migrationBuilder.AddColumn<string>(
                 name: "State",

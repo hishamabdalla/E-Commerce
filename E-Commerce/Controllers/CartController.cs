@@ -1,6 +1,7 @@
 ﻿using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models.OrderFile;
 using E_Commerce.Models.ShoppingCartFile;
+using E_Commerce.Models.UserFile;
 using E_Commerce.Models.ViewModels;
 using E_Commerce.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -58,8 +59,8 @@ namespace E_Commerce.Controllers
                 ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicaitonUserId == UserId, includeProperties: "ProductItem"),
                 Order = new()
             };
-            ShoppingCartVM.Order.User = _unitOfWork.User.Get(u => u.Id == UserId);
 
+            ShoppingCartVM.Order.User = _unitOfWork.User.Get(u => u.Id == UserId);
             ShoppingCartVM.Order.Name = ShoppingCartVM.Order.User.FirstName + " " + ShoppingCartVM.Order.User.LastName;
             ShoppingCartVM.Order.PhoneNumber = ShoppingCartVM.Order.User.PhoneNumber;
             ShoppingCartVM.Order.StreetAddress = ShoppingCartVM.Order.User.StreetAddress;
@@ -73,23 +74,7 @@ namespace E_Commerce.Controllers
                 cart.Price = cart.ProductItem.Price * cart.Quantity; // if you want to view every shopping cart item specific price
                 ShoppingCartVM.Order.TotalPrice += (cart.ProductItem.Price * cart.Quantity);
             }
-            ShoppingCartVM.Order.PaymentStatus = SD.PaymentStatusPending;
-            ShoppingCartVM.Order.OrderStatuss = SD.StatusPending;
-
-            _unitOfWork.Order.Add(ShoppingCartVM.Order);
-            _unitOfWork.Save();
-            foreach (var cart in ShoppingCartVM.ShoppingCartList)
-            {
-                OrderLine orderDetail = new()
-                {
-                    ProductItemId = cart.ProductItemId,
-                    OrderId = ShoppingCartVM.Order.Id,
-                    Price = cart.Price,
-                    Quantity = cart.Quantity
-                };
-                _unitOfWork.OrderLine.Add(orderDetail);
-                _unitOfWork.Save();
-            }
+           
             return View(ShoppingCartVM);
         }
         [HttpPost]
@@ -102,7 +87,8 @@ namespace E_Commerce.Controllers
             ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicaitonUserId == UserId, includeProperties: "ProductItem");
             ShoppingCartVM.Order.OrderDate = System.DateTime.Now;
             ShoppingCartVM.Order.UserId = UserId;
-            ShoppingCartVM.Order.User = _unitOfWork.User.Get(u => u.Id == UserId);
+
+            User Applicationuser = _unitOfWork.User.Get(u => u.Id == UserId);
 
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
@@ -110,7 +96,44 @@ namespace E_Commerce.Controllers
                 cart.Price = cart.ProductItem.Price * cart.Quantity; // if you want to view every shopping cart item specific price
                 ShoppingCartVM.Order.TotalPrice += (cart.ProductItem.Price * cart.Quantity);
             }
-            return View(ShoppingCartVM);
+            ShoppingCartVM.Order.PaymentStatus = SD.PaymentStatusPending;
+            ShoppingCartVM.Order.OrderStatuss = SD.StatusPending;
+            ShoppingCartVM.Order.AddressId = null;
+            ShoppingCartVM.Order.ImportancyId = null;
+            ShoppingCartVM.Order.OrderStatusId = null;
+            ShoppingCartVM.Order.TaxId = null;
+            ShoppingCartVM.Order.PaymentMethodId = null;
+
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Order.Add(ShoppingCartVM.Order);
+                _unitOfWork.Save();
+            }
+            else
+            {
+                return View(ShoppingCartVM);
+            }
+            foreach (var cart in ShoppingCartVM.ShoppingCartList)
+            {
+                OrderLine orderDetail = new()
+                {
+                    ProductItemId = cart.ProductItemId,
+                    OrderId = ShoppingCartVM.Order.Id,
+                    Price = cart.Price,
+                    Quantity = cart.Quantity
+                };
+                if (ModelState.IsValid)
+                {
+                    _unitOfWork.OrderLine.Add(orderDetail);
+                    _unitOfWork.Save();
+                }
+            }
+            return RedirectToAction(nameof(OrderConfirmation), new {id=ShoppingCartVM.Order.Id});
+        }
+
+        public IActionResult OrderConfirmation(int id)
+        {
+            return View(id);
         }
 
         public IActionResult Plus(int CartId) 

@@ -24,6 +24,16 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 table: "Orders",
                 type: "nvarchar(max)",
                 nullable: true);
+            migrationBuilder.AddColumn<string>(
+                name: "PhoneNumber",
+                table: "Orders",
+                type: "nvarchar(max)",
+                nullable: false);
+            migrationBuilder.AddColumn<string>(
+                name: "Name",
+                table: "Orders",
+                type: "nvarchar(max)",
+                nullable: false);
 
             migrationBuilder.AddColumn<string>(
                 name: "City",
