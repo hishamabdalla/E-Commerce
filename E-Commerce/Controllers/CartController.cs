@@ -131,8 +131,8 @@ namespace E_Commerce.Controllers
             }
             //it is a regular customer account and we need to capture payment
             //stripe logic
-            //var domain = "https://localhost:7050/";
-            var domain = "https://localhost:44355/";
+            var domain = "https://localhost:7050/";
+           // var domain = "https://localhost:44355/";
             var options = new SessionCreateOptions
             {
                 SuccessUrl = domain + $"Cart/OrderConfirmation?id={ShoppingCartVM.Order.Id}",
@@ -163,36 +163,36 @@ namespace E_Commerce.Controllers
             _unitOfWork.Order.UpdateStripePaymentID(ShoppingCartVM.Order.Id, session.Id, session.PaymentIntentId);
             _unitOfWork.Save();
             Response.Headers.Add("Location", session.Url);
-            //return new StatusCodeResult(303); 
+            return new StatusCodeResult(303); 
 
-            return RedirectToAction(nameof(OrderConfirmation), new {id=ShoppingCartVM.Order.Id});
+            //return RedirectToAction(nameof(OrderConfirmation), new {id=ShoppingCartVM.Order.Id});
         }
 
         public IActionResult OrderConfirmation(int id)
         {
-            //Order orderHeader = _unitOfWork.Order.Get(u => u.Id == id, includeProperties: "User");
-            //if (orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
-            //{
-            //    //this is an order by customer
+            Order orderHeader = _unitOfWork.Order.Get(u => u.Id == id, includeProperties: "User");
+            if (orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
+            {
+                //this is an order by customer
 
-            //    var service = new SessionService();
-            //    Session session = service.Get(orderHeader.SessionId);
+                var service = new SessionService();
+                Session session = service.Get(orderHeader.SessionId);
 
-            //    if (session.PaymentStatus.ToLower() == "paid")
-            //    {
-            //        _unitOfWork.Order.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
-            //        _unitOfWork.Order.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
-            //        _unitOfWork.Save();
-            //    }
+                if (session.PaymentStatus.ToLower() == "paid")
+                {
+                    _unitOfWork.Order.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
+                    _unitOfWork.Order.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
+                    _unitOfWork.Save();
+                }
 
 
-            //}
+            }
 
-            //List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
-            //    .GetAll(u => u.ApplicaitonUserId == orderHeader.UserId).ToList();
+            List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
+                .GetAll(u => u.ApplicaitonUserId == orderHeader.UserId).ToList();
 
-            //_unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
-            //_unitOfWork.Save();
+            _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
+            _unitOfWork.Save();
 
             return View(id);
         }

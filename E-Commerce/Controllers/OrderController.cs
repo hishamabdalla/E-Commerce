@@ -14,8 +14,8 @@ namespace E_Commerce.Controllers
         }
         public IActionResult Index()
         {
-            List <Order> orders=_unitOfWork.Order.GetAll().ToList();
-            return View();
+            List <Order> orders=_unitOfWork.Order.GetAll(includeProperties:"User").ToList();
+            return View(orders);
         }
 
       
