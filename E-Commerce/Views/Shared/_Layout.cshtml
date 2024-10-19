@@ -28,6 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-controller="Order" asp-action="Index">Manage Order</a>
+                        </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
@@ -48,7 +51,8 @@
                                     <li>
                                         <a asp-area="" asp-controller="ProductItem" asp-action="Index" class="dropdown-item">
                                             <i class="bi bi-box2"></i> &nbsp; Product Items
-                                        </a>
+                                        </a> 
+                                      
                                     </li>
                                 </ul>
                             </li>

@@ -6,7 +6,7 @@
     <div class="row pt-4 pb-3">
         <div class="col-6">
             <h2 class="text-primary">
-                Product List
+                Order List
             </h2>
         </div>
         <div class="col-6 text-end">
@@ -36,6 +36,9 @@
                 <th>
                     Total
                 </th>
+                <th>
+                    Details
+                </th>
 
 
             </tr>
@@ -53,27 +56,24 @@
                     <td>
                         @order.PhoneNumber
                     </td>
+                   
                     <td>
-                        @order.User.PhoneNumber
+                        @order.User.Email
                     </td>
                     <td>
-                        @order.State
+                        @order.OrderStatuss
                     </td>
                     <td>
                         @order.TotalPrice
                     </td>
 
 
-                    @* <td>
-                        <a asp-controller="Product" asp-action="Upsert" asp-route-id="@order.Id" class="btn btn-info mx-2">
+                     <td>
+                        <a asp-controller="Order" asp-action="Details" asp-route-OrderId="@order?.Id" class="btn btn-info mx-2">
                             <i class="bi bi-pencil-square"></i> Edit
                         </a>
                     </td>
-                    <td>
-                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@order.Id" class="btn btn-danger mx-2">
-                            <i class="bi bi-trash-fill"></i> Delete
-                        </a>
-                    </td> *@
+                    
                 </tr>
             }
         </tbody>
