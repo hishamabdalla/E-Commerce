@@ -10,19 +10,7 @@ namespace E_Commerce.DataAccessData.Configurations.OrderFileConfigurations
 
             builder.HasKey(o => o.Id);
 
-            builder.Property(o => o.PaymentMethodId)
-                   .IsRequired(); 
-
-            builder.Property(o => o.UserId)
-                   .IsRequired(); 
-
-            builder.Property(o => o.AddressId)
-                   .IsRequired(); 
-
-           builder.Property(o => o.OrderStatusId)
-                .IsRequired(); 
-
-            builder.Property(o => o.OrderDate)
+                    builder.Property(o => o.OrderDate)
                    .IsRequired(); 
 
             builder.Property(o => o.TotalPrice)
@@ -44,9 +32,9 @@ namespace E_Commerce.DataAccessData.Configurations.OrderFileConfigurations
                    .WithMany(a => a.Orders) 
                    .HasForeignKey(o => o.AddressId);
 
-            //builder.HasOne(o => o.OrderStatus)
-            //       .WithMany(s=>s.Orders) 
-            //       .HasForeignKey(o => o.OrderStatusId);
+            builder.HasOne(o => o.OrderStatus)
+                   .WithMany(s=>s.Orders) 
+                   .HasForeignKey(o => o.OrderStatusId);
 
             builder.HasOne(o => o.OrderImportancy)
                    .WithMany(i => i.Orders) 

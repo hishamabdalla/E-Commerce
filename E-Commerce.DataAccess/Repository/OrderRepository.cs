@@ -10,25 +10,21 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.DataAccessDataAccess.Repository
 {
-    public class OrderRepository:Repository<Order>, IOrderRepository
+    public class OrderRepository : Repository<Order>, IOrderRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public OrderRepository(ApplicationDbContext context):base(context) 
+        private ApplicationDbContext _db;
+        public OrderRepository(ApplicationDbContext db) : base(db)
         {
-            this._context = context;
+            _db = db;
         }
-
-
-       
-      
         public void Update(Order obj)
         {
-            _context.Orders.Update(obj);
+            _db.Orders.Update(obj);
         }
+
         public void UpdateStatus(int id, string orderStatus, string? paymentStatus = null)
         {
-            var orderFromDb = _context.Orders.FirstOrDefault(u => u.Id == id);
+            var orderFromDb = _db.Orders.FirstOrDefault(u => u.Id == id);
             if (orderFromDb != null)
             {
                 orderFromDb.OrderStatuss = orderStatus;
@@ -41,7 +37,7 @@ namespace E_Commerce.DataAccessDataAccess.Repository
 
         public void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId)
         {
-            var orderFromDb = _context.Orders.FirstOrDefault(u => u.Id == id);
+            var orderFromDb = _db.Orders.FirstOrDefault(u => u.Id == id);
             if (!string.IsNullOrEmpty(sessionId))
             {
                 orderFromDb.SessionId = sessionId;
@@ -54,4 +50,5 @@ namespace E_Commerce.DataAccessDataAccess.Repository
         }
     }
 }
+
  

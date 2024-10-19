@@ -45,7 +45,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("Carrier")
@@ -55,7 +55,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ImportancyId")
+                    b.Property<int?>("ImportancyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -65,7 +65,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderStatusId")
+                    b.Property<int?>("OrderStatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("OrderStatuss")
@@ -80,7 +80,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     b.Property<string>("PaymentIntentId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaymentMethodId")
+                    b.Property<int?>("PaymentMethodId")
                         .HasColumnType("int");
 
                     b.Property<string>("PaymentStatus")
@@ -108,7 +108,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TaxId")
+                    b.Property<int?>("TaxId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
@@ -833,33 +833,23 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 {
                     b.HasOne("E_Commerce.Models.UserFile.UserAddress", "UserAddress")
                         .WithMany("Orders")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("E_Commerce.Models.OrderFile.OrderImportancy", "OrderImportancy")
                         .WithMany("Orders")
-                        .HasForeignKey("ImportancyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImportancyId");
 
                     b.HasOne("E_Commerce.Models.OrderFile.OrderStatus", "OrderStatus")
                         .WithMany("Orders")
-                        .HasForeignKey("OrderStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderStatusId");
 
                     b.HasOne("E_Commerce.Models.Payment.UserPaymentMethod", "UserPaymentMethod")
                         .WithMany("Orders")
-                        .HasForeignKey("PaymentMethodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PaymentMethodId");
 
                     b.HasOne("E_Commerce.Models.OrderFile.Tax", "Tax")
                         .WithMany("Orders")
-                        .HasForeignKey("TaxId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TaxId");
 
                     b.HasOne("E_Commerce.Models.UserFile.User", "User")
                         .WithMany("Orders")

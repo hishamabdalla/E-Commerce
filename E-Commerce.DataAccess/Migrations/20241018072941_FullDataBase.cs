@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace E_Commerce.DataAccessDataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class FullDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,10 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: true),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -64,6 +68,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ParentCategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -275,6 +280,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -296,7 +302,8 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StreetNumber = table.Column<int>(type: "int", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UnitNumber = table.Column<int>(type: "int", nullable: true),
                     GovernorateID = table.Column<int>(type: "int", nullable: false)
@@ -419,14 +426,29 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PaymentMethodId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    OrderStatuss = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrackingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Carrier = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PaymentDueDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
-                    TaxId = table.Column<int>(type: "int", nullable: false),
-                    ImportancyId = table.Column<int>(type: "int", nullable: false),
-                    OrderStatusId = table.Column<int>(type: "int", nullable: false),
-                    OrderDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
+                    TaxId = table.Column<int>(type: "int", nullable: true),
+                    PaymentMethodId = table.Column<int>(type: "int", nullable: false),
+                    ImportancyId = table.Column<int>(type: "int", nullable: true),
+                    OrderStatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -441,8 +463,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         name: "FK_Orders_OrderImportancies_ImportancyId",
                         column: x => x.ImportancyId,
                         principalTable: "OrderImportancies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_OrderStatus_OrderStatusId",
                         column: x => x.OrderStatusId,
@@ -453,8 +474,7 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
                         name: "FK_Orders_Taxes_TaxId",
                         column: x => x.TaxId,
                         principalTable: "Taxes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_UserPaymentMethods_PaymentMethodId",
                         column: x => x.PaymentMethodId,
@@ -578,12 +598,12 @@ namespace E_Commerce.DataAccessDataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Name", "ParentCategoryId" },
+                columns: new[] { "Id", "ImageUrl", "Name", "ParentCategoryId" },
                 values: new object[,]
                 {
-                    { 1, "Shirts", null },
-                    { 2, "Shoes", null },
-                    { 3, "Jackets", null }
+                    { 1, null, "Shirts", null },
+                    { 2, null, "Shoes", null },
+                    { 3, null, "Jackets", null }
                 });
 
             migrationBuilder.CreateIndex(
