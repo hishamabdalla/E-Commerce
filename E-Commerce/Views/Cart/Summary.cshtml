@@ -98,13 +98,13 @@
                                             <h6 class="my-0">@item.ProductItem.SKU</h6>
                                             <small class="text-muted">Quantity: @item.Quantity</small>
                                         </div>
-                                        <span class="text-muted">@((item.Price*item.Quantity).ToString("c"))</span>
+                                        <span class="text-muted">@((item.Price*item.Quantity).ToString("C", new System.Globalization.CultureInfo("en-US")))</span>
                                     </li>
                                 }
 
                                 <li class="list-group-item d-flex justify-content-between bg-light">
                                     <small class="text-info">Total (USD)</small>
-                                    <strong class="text-info">@Model.Order.TotalPrice.ToString("c")</strong>
+                                    <strong class="text-info">@Model.Order.TotalPrice.ToString("C", new System.Globalization.CultureInfo("en-US"))</strong>
                                 </li>
                             </ul>
                         </div>

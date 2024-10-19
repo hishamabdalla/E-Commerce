@@ -72,8 +72,8 @@ namespace E_Commerce.Controllers
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
 
-                cart.Price = cart.ProductItem.Price * cart.Quantity; // if you want to view every shopping cart item specific price
-                ShoppingCartVM.Order.TotalPrice += (cart.ProductItem.Price * cart.Quantity);
+                cart.Price = cart.ProductItem.Price; // if you want to view every shopping cart item specific price
+                ShoppingCartVM.Order.TotalPrice += (cart.Price * cart.Quantity);
             }
            
             return View(ShoppingCartVM);

@@ -24,7 +24,7 @@
                             <div class="pl-1">
                                 <p class="text-dark text-opacity-75 text-center"> Price : 
                                     <span>
-                                        @productItem.Price.ToString("c")
+                                        @productItem.Price.ToString("C", new System.Globalization.CultureInfo("en-US"))
                                     </span>
                                 </p>
                                 <p class="text-dark text-opacity-75 text-center">
