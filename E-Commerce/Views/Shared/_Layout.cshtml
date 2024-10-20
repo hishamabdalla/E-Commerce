@@ -60,6 +60,12 @@
                                         </a>
                                     </li>
 
+                                    <li>
+                                        <a asp-area="" asp-controller="User" asp-action="Index" class="dropdown-item">
+                                            <i class="bi bi-box2"></i> &nbsp; Manage Users
+                                        </a>
+                                    </li>
+
                                 </ul>
 
                             </li>
@@ -83,9 +89,32 @@
         </main>
     </div>
 
-    <footer class="footer text-muted" style="background-color: #f8f9fa; padding: 1.5rem; text-align: center; font-size: 0.9rem; border-top: 1px solid #ddd;">
+    <style>
+        .footer {
+            background-color: #f8f9fa; /* Lighter background to match your design */
+            padding: 10px 0; /* Adjust the padding to make it smaller */
+            border-top: 1px solid #eaeaea; /* Optional border for a clean look */
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer .text-muted {
+            font-size: 14px; /* Make the text smaller */
+            color: #6c757d; /* Muted color to make it less prominent */
+        }
+
+    </style>
+
+    <footer class="footer">
         <div class="container">
-            &copy; 2024 - <strong>E_Commerce</strong> - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color: #007bff;">Privacy</a>
+            <p class="text-muted">&copy; 2024 - Nilura</p>
         </div>
     </footer>
 

@@ -156,11 +156,11 @@ namespace E_Commerce.Areas.Identity.Pages.Account
                 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                //user.FirstName = Input.FirstName;
-                //user.LastName = Input.LastName;
-                //user.PhoneNumber=Input.Phone;
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.PhoneNumber = Input.Phone;
                 //user.DateOfBirth = Input.DateOfBirth;
-                
+
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 int age = today.Year - Input.DateOfBirth.Year;
 
