@@ -1,21 +1,24 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - E_Commerce</title>
+    <title>Nilura</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/E_Commerce.styles.css" asp-append-version="true" />
-    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
-
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark" style="padding: 1rem 2rem;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E-Commerce</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: #f8f9fa; font-weight: bold;">Nilura</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,18 +26,15 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index" style="color: #f8f9fa; padding: 0.5rem;">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Order" asp-action="Index">Manage Order</a>
+                            <a class="nav-link active" asp-controller="Order" asp-action="Index" style="color: #f8f9fa; padding: 0.5rem;">Manage Order</a>
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #f8f9fa; padding: 0.5rem;">
                                     <i class="bi bi-gear-fill"></i> &nbsp; Content Management
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
@@ -51,21 +51,29 @@
                                     <li>
                                         <a asp-area="" asp-controller="ProductItem" asp-action="Index" class="dropdown-item">
                                             <i class="bi bi-box2"></i> &nbsp; Product Items
-                                        </a> 
-                                      
+                                        </a>
                                     </li>
+
+                                    <li>
+                                        <a asp-area="Identity" asp-page="/Account/Register" class="dropdown-item">
+                                            <i class="bi bi-box2"></i> &nbsp; Create User
+                                        </a>
+                                    </li>
+
                                 </ul>
+
                             </li>
                         }
 
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="Cart" asp-action="Index" class="nav-link">
-                                <i class="bi bi-cart-fill"></i> &nbsp; Cart <span class="badge bg-primary">(0)</span>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a asp-area="" asp-controller="Cart" asp-action="Index" class="nav-link" style="color: #f8f9fa; padding: 0.5rem;">
+                                    @await Component.InvokeAsync("ShoppingCart")
+                                </a>
+                            </li>
+                        
                     </ul>
                     <partial name="_LoginPartial" />
-                </div>
+                </div> 
             </div>
         </nav>
     </header>
@@ -75,11 +83,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted" style="background-color: #f8f9fa; padding: 1.5rem; text-align: center; font-size: 0.9rem; border-top: 1px solid #ddd;">
         <div class="container">
-            &copy; 2024 - E_Commerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - <strong>E_Commerce</strong> - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color: #007bff;">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

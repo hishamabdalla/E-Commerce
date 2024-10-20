@@ -9,7 +9,14 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="p-4 shadow-sm rounded" style="background-color: #f8f9fa;">
-            <h2 class="text-center mb-4">Create a New Account</h2>
+            @if (User.IsInRole("Admin"))
+            {
+                <h2 class="text-center mb-4">Register - ADMIN PORTAL</h2>
+            }
+            else
+            {
+                <h2 class="text-center mb-4">Register</h2>
+            }
             <div asp-validation-summary="All" class="text-danger mb-3" role="alert"></div>
             @* <div class="form-floating mb-4">
                 <input asp-for="Input.FirstName" class="form-control rounded-pill" autocomplete="FirstName" aria-required="true" placeholder="First Name" />
@@ -54,11 +61,14 @@
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div> *@
 
-            <div class="form-floating mb-4">
-                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select rounded-pill">
-                    <option disabled selected>--Select Role--</option>
-                </select>
-            </div>
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="form-floating mb-4">
+                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select rounded-pill">
+                        <option disabled selected>--Select Role--</option>
+                    </select>
+                </div>
+            }
 
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary rounded-pill mb-3">Register</button>
         </form>
