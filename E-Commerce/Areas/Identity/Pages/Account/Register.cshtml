@@ -18,7 +18,7 @@
                 <h2 class="text-center mb-4">Register</h2>
             }
             <div asp-validation-summary="All" class="text-danger mb-3" role="alert"></div>
-            @* <div class="form-floating mb-4">
+            <div class="form-floating mb-4">
                 <input asp-for="Input.FirstName" class="form-control rounded-pill" autocomplete="FirstName" aria-required="true" placeholder="First Name" />
                 <label asp-for="Input.FirstName">First Name</label>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
@@ -27,7 +27,7 @@
                 <input asp-for="Input.LastName" class="form-control rounded-pill" autocomplete="LastName" aria-required="true" placeholder="Last Name" />
                 <label asp-for="Input.LastName">Last Name</label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div> *@
+            </div>
             <div class="form-floating mb-4">
                 <input asp-for="Input.UserName" class="form-control rounded-pill" autocomplete="username" aria-required="true" placeholder="User Name" />
                 <label asp-for="Input.UserName">User Name</label>
@@ -50,12 +50,12 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-           @*  <div class="form-floating mb-4">
+            <div class="form-floating mb-4">
                 <input asp-for="Input.Phone" class="form-control rounded-pill"  aria-required="true" placeholder="Phone" />
                 <label asp-for="Input.Phone">Phone</label>
                 <span asp-validation-for="Input.Phone" class="text-danger"></span>
             </div>
-            <div class="form-floating mb-4">
+            @* <div class="form-floating mb-4">
                 <input asp-for="Input.DateOfBirth" type="date" class="form-control rounded-pill" aria-required="true" placeholder="Date of Birth" />
                 <label asp-for="Input.DateOfBirth">Date of Birth</label>
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>

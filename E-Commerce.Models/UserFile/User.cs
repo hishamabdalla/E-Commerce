@@ -30,5 +30,8 @@ namespace E_Commerce.Models.UserFile
 
         [NotMapped]
         public string Role { get; set; }
+
+        [NotMapped]
+        public string FullName { get; set; }
     }
 }

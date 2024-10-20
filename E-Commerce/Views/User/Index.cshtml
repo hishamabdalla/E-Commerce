@@ -1,0 +1,72 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                User List
+            </h2>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Role
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @user.FullName
+                    </td>
+                    <td>
+                        @user.Email
+                    </td>
+                    <td>
+                        @user.PhoneNumber
+                    </td>
+                    <td>
+                        @user.Role
+                    </td>
+
+                    @if(user.LockoutEnd == null)
+                    {
+                        <td>
+                            <a asp-controller="User" asp-action="LockUnlock" asp-route-id="@user.Id" class="btn btn-success mx-2">
+                                <i class="fa-solid fa-unlock"></i> UnLock
+                            </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-controller="User" asp-action="LockUnlock" asp-route-id="@user.Id" class="btn btn-danger mx-2">
+                                <i class="fa-solid fa-lock"></i> Lock
+                            </a>
+                        </td>
+                    }
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
