@@ -1,4 +1,5 @@
 using E_Commerce.DataAccess.Data;
+using E_Commerce.DataAccessDataAccess.DbInitializer;
 using E_Commerce.DataAccessDataAccess.Repository;
 using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models.UserFile;
@@ -15,14 +16,25 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(option => 
-    option.UseSqlServer(builder.Configuration.GetConnectionString("Hisham")));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("Ramadan")));
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>(); 
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(50);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -43,9 +55,21 @@ StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey"
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
+SeedDatabase();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initialize();
+    }
+}

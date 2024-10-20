@@ -131,8 +131,8 @@ namespace E_Commerce.Controllers
             }
             //it is a regular customer account and we need to capture payment
             //stripe logic
-            var domain = "https://localhost:7050/";
-           // var domain = "https://localhost:44355/";
+            //var domain = "https://localhost:7050/";
+            var domain = "https://localhost:44355/";
             var options = new SessionCreateOptions
             {
                 SuccessUrl = domain + $"Cart/OrderConfirmation?id={ShoppingCartVM.Order.Id}",
@@ -185,7 +185,7 @@ namespace E_Commerce.Controllers
                     _unitOfWork.Save();
                 }
 
-
+                HttpContext.Session.Clear(); // To Clear the view of shopping cart to 0
             }
 
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
@@ -208,10 +208,12 @@ namespace E_Commerce.Controllers
 
         public IActionResult Minus(int CartId)
         {
-            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == CartId);
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == CartId, tracked:true);
             if(cartFromDb.Quantity <= 1)
             {
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicaitonUserId == cartFromDb.ApplicaitonUserId).Count() - 1);
                 _unitOfWork.ShoppingCart.Remove(cartFromDb);
+
             }
             else
             {
@@ -225,7 +227,8 @@ namespace E_Commerce.Controllers
 
         public IActionResult Remove(int CartId)
         {
-            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == CartId);
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == CartId, tracked:true);
+            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicaitonUserId == cartFromDb.ApplicaitonUserId).Count()-1);
             _unitOfWork.ShoppingCart.Remove(cartFromDb);
             _unitOfWork.Save();
             return RedirectToAction("Index");
