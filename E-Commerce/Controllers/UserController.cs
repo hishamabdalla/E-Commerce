@@ -6,6 +6,7 @@ using E_Commerce.Models.UserFile;
 using E_Commerce.Models.ViewModels;
 using E_Commerce.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using Stripe.Checkout;
@@ -66,6 +67,51 @@ namespace E_Commerce.Controllers
 
         }
 
+        public IActionResult Edit(string id)
+        {
+            var objFromDb = unitOfWork.User.Get(u => u.Id == id, tracked: true);
+            objFromDb.FullName = objFromDb.FirstName + " " + objFromDb.LastName;
+            ViewBag.Roles = db.Roles.ToList();
+            return View(objFromDb);
+        }
+
+        [HttpPost]
+        [ActionName("Edit")]
+        public IActionResult ConfirmEdit(string id, string Role)
+        {
+
+            if (Role == "0")
+            {
+                var objFromDb = unitOfWork.User.Get(u => u.Id == id, tracked: true);
+                ModelState.AddModelError("DeptId", "Select Role");
+                objFromDb.FullName = objFromDb.FirstName + " " + objFromDb.LastName;
+                ViewBag.Roles = db.Roles.ToList();
+                return View("Edit", objFromDb);
+            }
+
+            var userRoles = db.UserRoles.ToList();
+            var userRole = userRoles.FirstOrDefault(UR => UR.UserId == id); // We Will Delete This Role and add a new role to the customer
+            if (userRole != null)
+            {
+                // Remove the current role 
+                db.UserRoles.Remove(userRole);
+                db.SaveChanges();
+            }
+
+            // Add a new UserRole with the updated role
+            var newUserRole = new IdentityUserRole<string>
+            {
+                UserId = id,
+                RoleId = Role
+            };
+
+
+            db.UserRoles.Add(newUserRole);
+            db.SaveChanges(); 
+
+            return RedirectToAction("Index");
+
+        }
         #region API calling
         [HttpGet]
         public IActionResult GetAll()

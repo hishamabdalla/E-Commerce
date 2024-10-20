@@ -63,7 +63,11 @@
                         </td>
                     }
 
-
+                    <td>
+                        <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-danger mx-2">
+                            <i class="fas fa-edit"></i>Permissions
+                        </a>
+                    </td>
 
                 </tr>
             }
