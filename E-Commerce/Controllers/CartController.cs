@@ -72,8 +72,8 @@ namespace E_Commerce.Controllers
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
 
-                cart.Price = cart.ProductItem.Price; // if you want to view every shopping cart item specific price
-                ShoppingCartVM.Order.TotalPrice += (cart.Price * cart.Quantity);
+                cart.Price = cart.ProductItem.Price * cart.Quantity; // if you want to view every shopping cart item specific price
+                ShoppingCartVM.Order.TotalPrice += cart.Price;
             }
            
             return View(ShoppingCartVM);
@@ -220,7 +220,7 @@ namespace E_Commerce.Controllers
             {
                 cartFromDb.Quantity -= 1;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
-                TempData["Erorr"] = "Product Decremented Successfully";
+                TempData["Success"] = "Product Decremented Successfully";
             }
 
             _unitOfWork.Save();
