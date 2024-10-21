@@ -222,11 +222,11 @@
                                             <div class="col-8">
 
                                                 <h6 class="my-0 text-primary">@detail.Product.SKU</h6>
-                                                <small class="text-muted">Price : @detail.Price.ToString("C", new System.Globalization.CultureInfo("en-US"))</small><br />
+                                                <small class="text-muted">Price : @detail.Product.Price.ToString("C", new System.Globalization.CultureInfo("en-US"))</small><br />
                                                 <small class="text-muted">Quantity : @detail.Quantity</small>
                                             </div>
                                             <div class="col-4 text-end">
-                                                <p class="text-success">@((detail.Quantity*detail.Price).ToString("C", new System.Globalization.CultureInfo("en-US")))</p>
+                                                <p class="text-success">@(detail.Price.ToString("C", new System.Globalization.CultureInfo("en-US")))</p>
                                             </div>
                                         </div>
                                     </li>
