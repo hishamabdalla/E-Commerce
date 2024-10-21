@@ -203,6 +203,7 @@ namespace E_Commerce.Controllers
             cartFromDb.Quantity += 1;
             _unitOfWork.ShoppingCart.Update(cartFromDb);
            _unitOfWork.Save();
+            TempData["Success"] = "Product Incremented Successfully";
             return RedirectToAction("Index");
         }
 
@@ -219,6 +220,7 @@ namespace E_Commerce.Controllers
             {
                 cartFromDb.Quantity -= 1;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
+                TempData["Erorr"] = "Product Decremented Successfully";
             }
 
             _unitOfWork.Save();

@@ -63,7 +63,7 @@ namespace E_Commerce.Controllers
                 if (ProductItemVM.ProductItem.Id != 0)
                 {
                     unitOfWork.ProductItem.Update(ProductItemVM.ProductItem);
-                    TempData["Update"] = "Product Item Updated Successfully";
+                    TempData["Success"] = "Product Item Updated Successfully";
                 }
                 else
                 {

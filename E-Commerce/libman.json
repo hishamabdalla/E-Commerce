@@ -16,6 +16,10 @@
         "webfonts/fa-v4compatibility.ttf",
         "webfonts/fa-v4compatibility.woff2"
       ]
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/toastr.js/"
     }
   ]
 }
