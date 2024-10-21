@@ -58,7 +58,7 @@ namespace E_Commerce.Controllers
                 {
                     //update
                     unitOfWork.Product.Update(productVM.Product);
-                    TempData["Update"] = "Product Updated Successfully";
+                    TempData["Success"] = "Product Updated Successfully";
 
                 }
                 else

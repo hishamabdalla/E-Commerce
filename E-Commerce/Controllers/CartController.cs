@@ -72,8 +72,8 @@ namespace E_Commerce.Controllers
             foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
 
-                cart.Price = cart.ProductItem.Price; // if you want to view every shopping cart item specific price
-                ShoppingCartVM.Order.TotalPrice += (cart.Price * cart.Quantity);
+                cart.Price = cart.ProductItem.Price * cart.Quantity; // if you want to view every shopping cart item specific price
+                ShoppingCartVM.Order.TotalPrice += cart.Price;
             }
            
             return View(ShoppingCartVM);
@@ -132,7 +132,7 @@ namespace E_Commerce.Controllers
             //it is a regular customer account and we need to capture payment
             //stripe logic
             //var domain = "https://localhost:7050/";
-            var domain = "https://localhost:44355/";
+            var domain = Request.Scheme + "://" + Request.Host.Value + "/";
             var options = new SessionCreateOptions
             {
                 SuccessUrl = domain + $"Cart/OrderConfirmation?id={ShoppingCartVM.Order.Id}",
@@ -146,7 +146,7 @@ namespace E_Commerce.Controllers
                 {
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                        UnitAmount = (long)(item.Price * 100), // $20.50 => 2050
+                        UnitAmount = (long)(item.ProductItem.Price * 100), // $20.50 => 2050
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
@@ -203,6 +203,7 @@ namespace E_Commerce.Controllers
             cartFromDb.Quantity += 1;
             _unitOfWork.ShoppingCart.Update(cartFromDb);
            _unitOfWork.Save();
+            TempData["Success"] = "Product Incremented Successfully";
             return RedirectToAction("Index");
         }
 
@@ -219,6 +220,7 @@ namespace E_Commerce.Controllers
             {
                 cartFromDb.Quantity -= 1;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
+                TempData["Success"] = "Product Decremented Successfully";
             }
 
             _unitOfWork.Save();

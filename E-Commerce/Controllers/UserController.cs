@@ -105,7 +105,7 @@ namespace E_Commerce.Controllers
                 RoleId = Role
             };
 
-
+            TempData["Success"] = "User Role Updated Successfully";
             db.UserRoles.Add(newUserRole);
             db.SaveChanges(); 
 
