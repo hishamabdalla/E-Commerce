@@ -42,17 +42,16 @@ namespace E_Commerce.Controllers
             return View(ProductItemList);
         }
 
-        public IActionResult ProductItemDetails(int Id)
+        public IActionResult ProductItemDetails(int productId)
         {
 
-
-            ProductItem productItem = _unitOfWork.ProductItem.Get(p => p.Id == Id, includeProperties: "Product");
+            ProductItem productItem = _unitOfWork.ProductItem.Get(p => p.Id == productId, includeProperties: "Product");
 
             ShoppingCart cart = new()
             {
                 ProductItem = productItem,
                 Quantity = 1,
-                ProductItemId = Id
+                ProductItemId = productItem.Id
             };
 
             if (cart.ProductItem == null)
@@ -60,25 +59,9 @@ namespace E_Commerce.Controllers
 
             return View(cart);
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-
-        /// Shopping Cart Confirm Add
-        /// 
-
         [HttpPost]
         [Authorize]
-        public IActionResult ConfirmAddToCart(ShoppingCart shoppingCart)
+        public IActionResult ProductItemDetails(ShoppingCart shoppingCart)
         {
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -112,5 +95,19 @@ namespace E_Commerce.Controllers
         }
 
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+       
     }
 }
