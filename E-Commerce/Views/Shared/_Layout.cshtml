@@ -3,6 +3,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,17 +14,18 @@
     <link rel="stylesheet" href="~/E_Commerce.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
     <link href="~/css/home.css" rel="stylesheet" />
-    @* <link href="~/css/productindex.css" rel="stylesheet" /> *@
     <link rel="stylesheet" href="~/toastr.js/toastr.min.css" />
- 
-
+    <!-- Custom modern CSS for fixed footer -->
+   
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Nilura</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -34,7 +36,8 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-gear-fill"></i> Content Management
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
@@ -57,7 +60,6 @@
             </div>
         </nav>
     </header>
- 
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -67,7 +69,7 @@
 
     <footer class="footer">
         <div class="container text-center">
-            <p class="text-muted">&copy; 2024 - Nilura</p>
+            <p class="text-muted mb-0">&copy; 2024 - Nilura</p>
         </div>
     </footer>
 
@@ -78,7 +80,7 @@
     <script src="~/toastr.js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

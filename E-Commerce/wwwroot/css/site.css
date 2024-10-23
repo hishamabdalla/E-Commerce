@@ -20,3 +20,41 @@ html {
 body {
   margin-bottom: 60px;
 }
+body, html {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Improve styling for modern look */
+.navbar {
+    padding: 1rem 2rem;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.75rem 1.25rem;
+}
+
+.dropdown-menu {
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+}
+
