@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(option => 
-    option.UseSqlServer(builder.Configuration.GetConnectionString("Anas")));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("Hisham")));
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
