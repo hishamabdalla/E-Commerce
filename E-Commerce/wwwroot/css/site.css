@@ -1,60 +1,87 @@
+/* Base Font Size */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px; /* Increase font size on larger screens */
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Focus Styles for Buttons and Inputs */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #007bff; /* Blue focus outline */
 }
 
+/* Layout Styles */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-}
-body, html {
-    height: 100%;
+    margin-bottom: 60px; /* Space for the footer */
     display: flex;
     flex-direction: column;
+    height: 100%;
+    background-color: #f8f9fa; /* Light background for better contrast */
 }
 
 main {
-    flex: 1;
+    flex: 1; /* Allow main to expand */
 }
 
+/* Footer Styles */
 .footer {
-    background-color: #343a40;
-    color: white;
+    background-color: #343a40; /* Dark background */
+    color: white; /* White text */
     padding: 10px 0;
-    position: fixed;
+    position: fixed; /* Fixed footer at bottom */
     width: 100%;
     bottom: 0;
+    text-align: center; /* Center text */
 }
 
-/* Improve styling for modern look */
+/* Navbar Styles */
 .navbar {
-    padding: 1rem 2rem;
+    padding: 1rem 2rem; /* Spacing around navbar items */
+    background-color: #007bff; /* Primary color for navbar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .navbar-brand {
-    font-weight: bold;
-    font-size: 1.5rem;
+    font-weight: bold; /* Bold branding */
+    font-size: 1.5rem; /* Size of navbar brand */
+    color: #fff; /* White color for contrast */
 }
 
 .navbar-nav .nav-link {
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 1.25rem; /* Spacing for nav links */
+    color: #f8f9fa; /* Light color for links */
+    transition: color 0.3s ease; /* Smooth transition */
 }
 
+    .navbar-nav .nav-link:hover {
+        color: #e2e6ea; /* Lighter shade on hover */
+    }
+
+/* Dropdown Menu Styles */
 .dropdown-menu {
-    border-radius: 0.25rem;
-    background-color: #f8f9fa;
+    border-radius: 0.25rem; /* Rounded corners */
+    background-color: #ffffff; /* White background for dropdown */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); /* Shadow for dropdown */
 }
 
+/* Utility Classes */
+.text-center {
+    text-align: center; /* Centering text */
+}
+
+.mb-3 {
+    margin-bottom: 1rem; /* Bottom margin for spacing */
+}
