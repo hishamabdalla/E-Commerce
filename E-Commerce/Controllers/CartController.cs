@@ -131,7 +131,7 @@ namespace E_Commerce.Controllers
             }
             //it is a regular customer account and we need to capture payment
             //stripe logic
-            //var domain = "https://localhost:7050/";
+            //var domain = "https://localhost:44355/";
             var domain = Request.Scheme + "://" + Request.Host.Value + "/";
             var options = new SessionCreateOptions
             {
