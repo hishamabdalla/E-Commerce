@@ -1,32 +1,53 @@
-﻿﻿
-@model IEnumerable<Category>
-@* <!-- Include Bootstrap CSS for styling -->
+﻿@model IEnumerable<Category>
+
+<!-- Include Bootstrap CSS for styling -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-<!-- Link to your custom CSS -->
 
-@* <partial name="_Notification" /> *@
+<div class="container py-4">
+    <h2 class="text-center mb-5 font-weight-bold">Explore Our Categories</h2>
+    <div class="row justify-content-center">
+        @foreach (var category in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card border-0 shadow-sm h-100 text-center">
+                    <!-- Category Image with Link -->
+                    <a asp-action="ProductIndex" asp-route-Id="@category.Id">
+                        <img src="@category.ImageUrl" class="card-img-top rounded" style="height: 300px; object-fit: cover;" alt="@category.Name" />
+                    </a>
 
-<div class="row pb-3">
-    @foreach(var category in Model)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class="row p-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
-                        <img src="@category.ImageUrl" class="card-img-top rounded"/>
-                        <div class="card-body pb-0">
-                            <div class="pl-1">
-                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@category.Name</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <a asp-action="ProductIndex" asp-route-Id="@category.Id" class="btn btn-primary bg-gradient border-0 form-control">
-                            Details
-                        </a>
+                    <!-- Category Details -->
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-uppercase text-dark opacity-75">@category.Name</h5>
+                        <!-- The button is removed -->
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+<!-- Optional: Custom CSS -->
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 15px; /* Rounded card corners */
+        overflow: hidden; /* Prevent image overflow */
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-img-top {
+        border-radius: 15px 15px 0 0; /* Rounded top corners for the image */
+    }
+
+    .card-title {
+        margin-top: 10px; /* Space between image and title */
+    }
+</style>
