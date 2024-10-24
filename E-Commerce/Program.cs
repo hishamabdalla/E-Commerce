@@ -5,6 +5,8 @@ using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models.UserFile;
 using E_Commerce.Utility;
 using Habanero.Util;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(option => 
-    option.UseSqlServer(builder.Configuration.GetConnectionString("Hisham")));
+
+    option.UseSqlServer(builder.Configuration.GetConnectionString("Ramadan")));
+
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
@@ -29,7 +33,18 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 builder.Services.AddAuthentication().AddFacebook(option =>
 {
     option.AppId = "563437946252281";
-    option.AppSecret = "fd88b6b38bb1e50bba234331683e0f69"; 
+    option.AppSecret = "fd88b6b38bb1e50bba234331683e0f69";
+
+    option.Events = new OAuthEvents
+    {
+        OnRemoteFailure = context =>
+        {
+            // Log the error or handle it gracefully
+            context.Response.Redirect("identity/account/register"); // Redirect back to login page
+            context.HandleResponse(); // Prevent the error from being thrown
+            return Task.CompletedTask;
+        }
+    };
 });
 
 
