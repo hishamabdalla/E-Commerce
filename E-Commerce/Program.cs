@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(option => 
 
-    option.UseSqlServer(builder.Configuration.GetConnectionString("Ramadan")));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("Hisham")));
 
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
