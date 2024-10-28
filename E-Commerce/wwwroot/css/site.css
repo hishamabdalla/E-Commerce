@@ -9,6 +9,54 @@ html {
     }
 }
 
+/* General Layout */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px; /* Space for footer */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #f8f9fa; /* Light background for better contrast */
+}
+
+main {
+    flex: 1; /* Allows main content to expand */
+}
+
+/* Navbar Styles */
+.navbar {
+    padding: 1rem 2rem;
+    background-color: #007bff; /* Primary color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #fff; /* White text for branding */
+}
+
+.navbar-nav .nav-link {
+    padding: 0.75rem 1.25rem;
+    color: #f8f9fa;
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #e2e6ea; /* Light shade on hover */
+    }
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); /* Shadow for depth */
+}
+
 /* Focus Styles for Buttons and Inputs */
 .btn:focus,
 .btn:active:focus,
@@ -18,70 +66,22 @@ html {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #007bff; /* Blue focus outline */
 }
 
-/* Layout Styles */
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px; /* Space for the footer */
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background-color: #f8f9fa; /* Light background for better contrast */
-}
-
-main {
-    flex: 1; /* Allow main to expand */
-}
-
 /* Footer Styles */
 .footer {
     background-color: #343a40; /* Dark background */
-    color: white; /* White text */
+    color: white;
     padding: 10px 0;
-    position: fixed; /* Fixed footer at bottom */
     width: 100%;
+    position: fixed; /* Fixed at bottom */
     bottom: 0;
-    text-align: center; /* Center text */
-}
-
-/* Navbar Styles */
-.navbar {
-    padding: 1rem 2rem; /* Spacing around navbar items */
-    background-color: #007bff; /* Primary color for navbar */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-.navbar-brand {
-    font-weight: bold; /* Bold branding */
-    font-size: 1.5rem; /* Size of navbar brand */
-    color: #fff; /* White color for contrast */
-}
-
-.navbar-nav .nav-link {
-    padding: 0.75rem 1.25rem; /* Spacing for nav links */
-    color: #f8f9fa; /* Light color for links */
-    transition: color 0.3s ease; /* Smooth transition */
-}
-
-    .navbar-nav .nav-link:hover {
-        color: #e2e6ea; /* Lighter shade on hover */
-    }
-
-/* Dropdown Menu Styles */
-.dropdown-menu {
-    border-radius: 0.25rem; /* Rounded corners */
-    background-color: #ffffff; /* White background for dropdown */
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); /* Shadow for dropdown */
+    text-align: center;
 }
 
 /* Utility Classes */
 .text-center {
-    text-align: center; /* Centering text */
+    text-align: center;
 }
 
 .mb-3 {
-    margin-bottom: 1rem; /* Bottom margin for spacing */
+    margin-bottom: 1rem; /* Standard bottom margin */
 }
