@@ -4,7 +4,6 @@ using E_Commerce.DataAccessDataAccess.Repository;
 using E_Commerce.DataAccessDataAccess.Repository.IRepository;
 using E_Commerce.Models.UserFile;
 using E_Commerce.Utility;
-using Habanero.Util;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(option => 
 
-    option.UseSqlServer(builder.Configuration.GetConnectionString("Hisham2")));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("CS")));
 
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
